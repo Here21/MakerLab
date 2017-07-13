@@ -1,0 +1,63 @@
+.business-card {
+  width: 68.75rem;
+  height: 23rem;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFF;
+  box-shadow: #BEBEBE 5px 5px 8px 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 38rem;
+
+  .user-avatar {
+    width: 5.625rem;
+    height: 5.625rem;
+    border-radius: 50%;
+  }
+
+  .user-name {
+
+  }
+
+  .user-feature {
+
+  }
+
+  .user-brief {
+
+  }
+
+  .user-skill {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 31.25rem;
+    height: 5.5rem;
+
+    .skill-field-group {
+      display: flex;
+    }
+
+    .skill-field-item {
+      width: 50px;
+      height: 68px;
+      margin: 0 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

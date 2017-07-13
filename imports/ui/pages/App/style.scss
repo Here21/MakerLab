@@ -1,0 +1,23 @@
+html {
+  font-family: 'Open Sans', Helvetica Neue, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #666;
+}
+
+a {
+  text-decoration: none
+}
+
+a:hover {
+  text-decoration: underline
+}
+
+.inner {
+  max-width: 75rem;
+  width: 75rem;
+  margin: 0 auto;
+}
+
+body {
+  background-image: url("/images/subtle_white_feathers.png");
+}

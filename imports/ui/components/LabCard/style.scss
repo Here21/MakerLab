@@ -1,0 +1,56 @@
+.lab-card-image {
+  height: 208px;
+}
+
+.lab-card-content {
+  padding: 16px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+  }
+
+  .user-feature {
+    width: 220px;
+    text-align: center;
+  }
+
+  .lab-introduce {
+    color: #999;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .lab-master-info {
+    display: flex;
+    align-items: center;
+    background-color: cadetblue;
+    padding: 8px;
+    transform: skew(20deg);
+
+    div, p {
+      transform: skew(-20deg)
+
+    }
+  }
+
+  .master-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
+
+/*使内部文字内容不倾斜*/
+//.lab-master-info > div, .lab-master-info > p{
+//  transform: skew(-20deg)
+//}

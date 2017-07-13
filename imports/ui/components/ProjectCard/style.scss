@@ -1,0 +1,46 @@
+.project-card-image {
+  height: 210px;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 210px;
+  }
+
+  .project-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 16px;
+    border: 1px solid #FAFAFA;
+    border-radius: 6px;
+    padding: 6px;
+  }
+}
+
+.project-card-content {
+  padding: 16px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  .project-introduce {
+    color: #999;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .project-status-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
