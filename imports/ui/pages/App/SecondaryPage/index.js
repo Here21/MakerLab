@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import BusinessCard from '../../../components/BusinessCard'
-import ProjectCard from '../../../components/ProjectCard'
-import CourseCard from '../../../components/CourseCard'
-import './style.css'
+import React, { Component } from 'react';
+import BusinessCard from '../../../components/BusinessCard';
+import ProjectCard from '../../../components/ProjectCard';
+import CourseCard from '../../../components/CourseCard';
+import './style.scss';
 
 export default class SecondaryPage extends Component {
   render() {
@@ -22,26 +22,22 @@ export default class SecondaryPage extends Component {
             <h1 className="project-part-title">项目展示</h1>
             <div className="bottom-part-container">
               {
-                [1, 2, 3, 4, 5, 6, 7].map((k) => {
-                  return (
-                    <ProjectCard key={k} />
-                  )
-                })
+                [1, 2, 3, 4, 5, 6, 7].map(k => (
+                  <ProjectCard key={k} />
+                ))
               }
             </div>
             <h1 className="project-part-title">专业课程</h1>
             <div className="bottom-part-container">
               {
-                [1, 2].map((k) => {
-                  return (
-                    <CourseCard key={k} />
-                  )
-                })
+                [1, 2].map(k =>
+                  <CourseCard key={k} />
+                )
               }
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

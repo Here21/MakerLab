@@ -1,65 +1,67 @@
-import React from 'react'
-import { Form, Input, Tooltip, Icon, Button, Radio } from 'antd'
-import './style.scss'
+import React from 'react';
+import { Form, Input, Tooltip, Icon, Button, Radio } from 'antd';
+import PropTypes from 'prop-types';
 
-const FormItem = Form.Item
+import './style.scss';
+
+const FormItem = Form.Item;
 const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group
+const RadioGroup = Radio.Group;
 
 
 class RegistrationForm extends React.Component {
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
     this.state = {
       confirmDirty: false,
-      gender: 'Male'
-    }
+      gender: 'Male',
+    };
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
+  handleSubmit(e) {
+    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
-        this.props.registration(values)
+        console.log('Received values of form: ', values);
+        this.props.registration(values);
       }
-    })
+    });
   }
 
-  handleConfirmBlur = (e) => {
-    const value = e.target.value
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value })
+  handleConfirmBlur(e) {
+    const value = e.target.value;
+    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   }
 
-  checkPassword = (rule, value, callback) => {
-    const form = this.props.form
+  checkPassword(rule, value, callback) {
+    const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!')
+      callback('Two passwords that you enter is inconsistent!');
     } else {
-      callback()
+      callback();
     }
   }
 
-  checkConfirm = (rule, value, callback) => {
-    const form = this.props.form
+  checkConfirm(rule, value, callback) {
+    const form = this.props.form;
     if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true })
+      form.validateFields(['confirm'], { force: true });
     }
-    callback()
+    callback();
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form
+    const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
-    }
+    };
     const tailFormItemLayout = {
       wrapperCol: {
         span: 14,
         offset: 6,
       },
-    }
+    };
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem
@@ -84,8 +86,8 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('gender', {
             rules: [{
-              required: true, message: '请输入密码!'
-            }]
+              required: true, message: '请输入密码!',
+            }],
           })(
             <RadioGroup>
               <RadioButton value="Male">男</RadioButton>
@@ -126,14 +128,14 @@ class RegistrationForm extends React.Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label={(
+          label={
             <span>
               Nickname
               <Tooltip title="你希望别人怎么称呼您?">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
-          )}
+          }
           hasFeedback
         >
           {getFieldDecorator('nickName', {
@@ -146,14 +148,14 @@ class RegistrationForm extends React.Component {
           <Button type="primary" htmlType="submit" size="large">Register</Button>
         </FormItem>
       </Form>
-    )
+    );
   }
 }
 
-RegistrationForm.contextTypes = {
-  turnLogin: React.PropTypes.string,
-  registration: React.PropTypes.func
-}
+RegistrationForm.propTypes = {
+  turnLogin: PropTypes.func,
+  registration: PropTypes.func,
+};
 
-const WrappedRegistrationForm = Form.create()(RegistrationForm)
-export default WrappedRegistrationForm
+const WrappedRegistrationForm = Form.create()(RegistrationForm);
+export default WrappedRegistrationForm;

@@ -1,29 +1,31 @@
-import React from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd'
-import './style.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import './style.scss';
 
 const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
-  // constructor(props, context) {
-  //   super(props, context)
-  //   this.state = {
-  //
-  //   }
-  // }
+  constructor(props, context) {
+    super(props, context)
+    // this.state = {
+    //
+    // }
+    this.handleTurnRegistration = this.handleTurnRegistration.bind(this);
+  }
 
-  handleSubmit = (e) => {
+  handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        this.props.login(values)
+        this.props.login(values);
       }
     });
   }
 
   handleTurnRegistration() {
-    this.props.turnRegistration()
+    this.props.turnRegistration();
   }
 
   render() {
@@ -35,8 +37,8 @@ class LoginForm extends React.Component {
             rules: [{
               type: 'email', message: '输入的电子邮箱无效!',
             }, {
-              required: true, message: '请输入用户名!'
-            }]
+              required: true, message: '请输入用户名!',
+            }],
           })(
             <Input addonBefore={<Icon type="user" />} placeholder="用户名" />
           )}
@@ -66,11 +68,11 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.contenxTypes = {
-  turnRegistration: React.PropTypes.string,
-  login: React.PropTypes.func
-}
+LoginForm.propTypes = {
+  turnRegistration: PropTypes.func,
+  login: PropTypes.func,
+};
 
 const WrappedLoginForm = Form.create()(LoginForm);
 
-export default WrappedLoginForm
+export default WrappedLoginForm;

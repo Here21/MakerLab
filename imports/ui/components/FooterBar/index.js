@@ -1,5 +1,5 @@
-import React from 'react'
-import './style.scss'
+import React from 'react';
+import './style.scss';
 
 const NavBar = () => (
   <footer>
@@ -8,7 +8,11 @@ const NavBar = () => (
         <h1>关于,  MakerLab</h1>
         <hr />
         <section>
-          创客工坊目的就是为了拉近学生与教师的距离，并且期望教师将更多的资源可以直观地展现在这里，提供给学生。同样，教师也可以将自己系部的竞赛项目发布于此，方便同学报名组队。而专业课不仅是展现教师风采的板块，也是学生了解该课程的主要方式
+          创客工坊目的就是为了拉近学生与教师的距离，
+          并且期望教师将更多的资源可以直观地展现在这里，
+          提供给学生。同样，教师也可以将自己系部的竞赛项目发布于此，
+          方便同学报名组队。而专业课不仅是展现教师风采的板块，
+          也是学生了解该课程的主要方式
         </section>
       </div>
       <div className="bottom-part">
@@ -26,4 +30,4 @@ const NavBar = () => (
   </footer>
 )
 
-export default NavBar
+export default NavBar;

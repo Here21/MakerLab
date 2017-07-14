@@ -1,32 +1,33 @@
-import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
-import { Card } from 'antd'
-import { Meteor } from 'meteor/meteor'
-import { Accounts } from 'meteor/accounts-base'
-import LoginForm from '../../../components/LoginForm'
-import Registration from '../../../components/RegistrationForm'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router';
+import { Card } from 'antd';
+import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+import LoginForm from '../../../components/LoginForm';
+import Registration from '../../../components/RegistrationForm';
 
 import './style.scss';
 
 export default class Login extends Component {
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
     this.state = {
-      loginState: 'login'
-    }
+      loginState: 'login',
+    };
+    this.onHandleTransition = this.onHandleTransition.bind(this);
   }
 
   onHandleLogin(value) {
-    console.log(value)
     Meteor.loginWithPassword(value.email, value.password, (error) => {
       if (error) {
         console.log(error)
         // TODO: 使用提示组件提示错误
-        return
+        return;
       }
       // TODO: 使用提示组件提示登录成功，并设置setTimeOut
-      browserHistory.push('/dashboard')
-    })
+      browserHistory.push('/dashboard');
+    });
   }
 
   onHandleRegistration(values) {
@@ -35,23 +36,23 @@ export default class Login extends Component {
       password: values.password,
       profile: {
         nickName: values.nickName,
-        gender: values.gender
-      }
-    }
+        gender: values.gender,
+      },
+    };
     Accounts.createUser(userInfo, (error) => {
       if (error) {
-        console.log(error)
-        return
+        console.log(error);
+        return;
       }
       // TODO: 使用提示组件提示登录成功，并设置setTimeOut
-      browserHistory.push('/dashboard')
-    })
+      browserHistory.push('/dashboard');
+    });
   }
 
   onHandleTransition() {
     this.setState({
-      loginState: this.state.loginState === 'login' ? 'registration' : 'login'
-    })
+      loginState: this.state.loginState === 'login' ? 'registration' : 'login',
+    });
   }
 
   render() {
@@ -75,6 +76,12 @@ export default class Login extends Component {
         </div>
         { this.props.children }
       </div>
-    )
+    );
   }
 }
+
+
+Login.propTypes = {
+  children: PropTypes.node,
+  location: PropTypes.string,
+};
