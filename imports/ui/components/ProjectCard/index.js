@@ -1,6 +1,6 @@
-import React from 'react'
-import { Card } from 'antd'
-import './style.scss'
+import React from 'react';
+import { Card } from 'antd';
+import './style.scss';
 
 const ProjectCard = ({ user }) => (
   <Card style={{ width: 292, height: 340, margin: '4px 4px' }} bodyStyle={{ padding: 0 }}>
@@ -10,7 +10,12 @@ const ProjectCard = ({ user }) => (
     </div>
     <div className="project-card-content">
       <h1>Lab名称</h1>
-      <p className="project-introduce">个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述</p>
+      <p className="project-introduce">
+        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
+        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
+        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
+        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
+      </p>
       <div className="project-status-info">
         <p className="project-author">MakerLab团队</p>
         <p className="project-viewer">1271</p>
@@ -20,4 +25,4 @@ const ProjectCard = ({ user }) => (
 )
 
 
-export default ProjectCard
+export default ProjectCard;

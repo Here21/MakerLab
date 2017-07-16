@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import Loading from '../components/Loading';
-import BodyData from '../../api/documents/collections/bodyData';
+import BodyData from '../../api/documents/collections/lab';
 import BodyDataPage from '../pages/BodyData';
 import { BMR } from '../../constants/formula';
 

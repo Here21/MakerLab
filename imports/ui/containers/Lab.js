@@ -3,7 +3,7 @@ import { composeWithTracker } from 'react-komposer';
 import Loading from '../components/Loading';
 import Lab from '../pages/App/Lab';
 
-import BodyData from '../../api/documents/collections/bodyData';
+import BodyData from '../../api/documents/collections/lab';
 
 
 const composer = ({ params }, onData) => {

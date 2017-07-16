@@ -1,25 +1,30 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-const Plans = new Mongo.Collection('plans');
-export default Plans;
+const Lab = new Mongo.Collection('Lab');
+export default Lab;
 
-Plans.schema = new SimpleSchema({
-  username: {
+Lab.schema = new SimpleSchema({
+  ownerId: {
     type: String,
+  },
+  labName: {
+    type: String,
+  },
+  description: {
+    type: String,
+    optional: true,
+  },
+  researchDirection: {
+    type: String,
+    optional: true,
+  },
+  likes: {
+    type: Number,
+    optional: true,
   },
   state: {
     type: String,
-    allowedValues: ['正常', '临近', '停餐', '到期'],
-    optional: true,
-  },
-  type: {
-    type: String,
-    optional: true,
-  },
-  days: {
-    type: Number,
-    optional: true,
   },
   createdAt: {
     type: Date,
@@ -45,4 +50,4 @@ Plans.schema = new SimpleSchema({
   },
 });
 
-Plans.attachSchema(Plans.schema);
+Lab.attachSchema(Lab.schema);

@@ -31,7 +31,9 @@ export default class Dashboard extends Component {
           collapsible
           collapsed={this.state.collapsed}
         >
-          <div className="logo" />
+          <div className="logo">
+            <p>MakerLab</p>
+          </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <Link to="/dashboard/me" activeClassName="active" activeStyle={{ color: '#fff' }}>
