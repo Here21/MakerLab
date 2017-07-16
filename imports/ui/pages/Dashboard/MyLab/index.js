@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import ProjectCard from '../../../components/ProjectCard'
-import './style.scss'
+import React, { Component } from 'react';
+import ProjectCard from '../../../components/ProjectCard';
+import './style.scss';
 
 export default class MyLab extends Component {
   render() {
@@ -12,6 +12,6 @@ export default class MyLab extends Component {
         <ProjectCard />
         <ProjectCard />
       </div>
-    )
+    );
   }
 }

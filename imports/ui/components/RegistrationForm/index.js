@@ -16,6 +16,11 @@ class RegistrationForm extends React.Component {
       confirmDirty: false,
       gender: 'Male',
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkConfirm = this.checkConfirm.bind(this);
+    this.checkPassword = this.checkPassword.bind(this);
+    this.handleConfirmBlur = this.handleConfirmBlur.bind(this);
+
   }
 
   handleSubmit(e) {
@@ -52,18 +57,42 @@ class RegistrationForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    //
+    // const formItemLayout = {
+    //   labelCol: { span: 6 },
+    //   wrapperCol: { span: 14 },
+    // };
+    // const tailFormItemLayout = {
+    //   wrapperCol: {
+    //     span: 14,
+    //     offset: 6,
+    //   },
+    // };
+
     const formItemLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 14 },
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 14 },
+      },
     };
     const tailFormItemLayout = {
       wrapperCol: {
-        span: 14,
-        offset: 6,
+        xs: {
+          span: 24,
+          offset: 0,
+        },
+        sm: {
+          span: 14,
+          offset: 6,
+        },
       },
     };
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} className="registration-form">
         <FormItem
           {...formItemLayout}
           label="邮箱"
@@ -71,9 +100,9 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('email', {
             rules: [{
-              type: 'email', message: '输入的电子邮箱无效!',
+              type: 'email', message: 'The input is not valid E-mail!',
             }, {
-              required: true, message: '请输入您的电子邮箱！',
+              required: true, message: 'Please input your E-mail!',
             }],
           })(
             <Input />
@@ -84,17 +113,10 @@ class RegistrationForm extends React.Component {
           label="性别"
           hasFeedback
         >
-          {getFieldDecorator('gender', {
-            rules: [{
-              required: true, message: '请输入密码!',
-            }],
-          })(
-            <RadioGroup>
-              <RadioButton value="Male">男</RadioButton>
-              <RadioButton value="Unknown">不确定？</RadioButton>
-              <RadioButton value="Female">女</RadioButton>
-            </RadioGroup>
-          )}
+          <RadioGroup defaultValue="Male">
+            <RadioButton value="Male">男</RadioButton>
+            <RadioButton value="Female">女</RadioButton>
+          </RadioGroup>
         </FormItem>
         <FormItem
           {...formItemLayout}
@@ -103,7 +125,7 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('password', {
             rules: [{
-              required: true, message: '请输入密码!',
+              required: true, message: 'Please input your password!',
             }, {
               validator: this.checkConfirm,
             }],
@@ -118,7 +140,7 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('confirm', {
             rules: [{
-              required: true, message: '请确认您的密码!',
+              required: true, message: 'Please confirm your password!',
             }, {
               validator: this.checkPassword,
             }],
@@ -128,24 +150,31 @@ class RegistrationForm extends React.Component {
         </FormItem>
         <FormItem
           {...formItemLayout}
-          label={
+          label={(
             <span>
-              Nickname
-              <Tooltip title="你希望别人怎么称呼您?">
+              Nickname&nbsp;
+              <Tooltip title="What do you want other to call you?">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
-          }
+          )}
           hasFeedback
         >
-          {getFieldDecorator('nickName', {
-            rules: [{ required: true, message: '请输入您的名字!' }],
+          {getFieldDecorator('nickname', {
+            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
           })(
             <Input />
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" size="large">Register</Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="registration-button"
+          >
+            注册
+          </Button>
+          已有账号，<a onClick={() => this.props.turnLogin('login')}>已有账号，去登陆!</a>
         </FormItem>
       </Form>
     );

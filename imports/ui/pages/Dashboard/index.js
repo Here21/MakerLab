@@ -1,24 +1,26 @@
-import React, { Component } from 'react'
-import { Layout, Menu, Icon } from 'antd'
-import { Link } from 'react-router'
-import './style.scss'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Layout, Menu, Icon } from 'antd';
+import { Link } from 'react-router';
+import './style.scss';
 
-const { Header, Sider, Content } = Layout
+const { Header, Sider, Content } = Layout;
 
 
-export default class AsideCollapse extends Component {
+export default class Dashboard extends Component {
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
     this.state = {
       loginState: 'login',
       collapse: true,
-    }
+    };
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
     this.setState({
       collapsed: !this.state.collapsed,
-    })
+    });
   }
 
   render() {
@@ -56,7 +58,7 @@ export default class AsideCollapse extends Component {
             <Icon
               className="trigger"
               type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={::this.toggle}
+              onClick={this.toggle}
             />
           </Header>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
@@ -67,3 +69,9 @@ export default class AsideCollapse extends Component {
     );
   }
 }
+
+
+Dashboard.propTypes = {
+  children: PropTypes.node,
+  registration: PropTypes.func,
+};

@@ -14,11 +14,11 @@ class App extends Component {
 
     return (
     <Layout className="layout" style={{ backgroundImage: 'url("/images/subtle_white_feathers.png")' }}>
-      <Header>
+      <Header style={{ zIndex: 10, position: 'fixed', width: '100%' }}>
         <Navigation pathname={location.pathname} />
       </Header>
       <Content>
-        <div style={{ width: '1200px', margin: '3rem auto' }}>
+        <div style={{ width: '1200px', margin: '5rem auto' }}>
           { this.props.children }
         </div>
       </Content>
@@ -33,7 +33,7 @@ class App extends Component {
 
 App.propTypes = {
   children: PropTypes.node,
-  location: PropTypes.string,
+  location: PropTypes.object,
 };
 
 export default App;

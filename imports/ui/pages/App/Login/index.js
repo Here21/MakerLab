@@ -49,9 +49,9 @@ export default class Login extends Component {
     });
   }
 
-  onHandleTransition() {
+  onHandleTransition(path) {
     this.setState({
-      loginState: this.state.loginState === 'login' ? 'registration' : 'login',
+      loginState: path,
     });
   }
 
@@ -74,7 +74,7 @@ export default class Login extends Component {
             }
           </Card>
         </div>
-        { this.props.children }
+        {/*{ this.props.children }*/}
       </div>
     );
   }

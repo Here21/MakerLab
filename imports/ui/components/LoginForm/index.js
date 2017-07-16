@@ -11,7 +11,8 @@ class LoginForm extends React.Component {
     // this.state = {
     //
     // }
-    this.handleTurnRegistration = this.handleTurnRegistration.bind(this);
+    // this.handleTurnRegistration = this.handleTurnRegistration.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
@@ -24,15 +25,20 @@ class LoginForm extends React.Component {
     });
   }
 
-  handleTurnRegistration() {
-    this.props.turnRegistration();
-  }
+  // handleTurnRegistration() {
+  //   this.props.turnRegistration();
+  // }
 
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
-        <FormItem>
+        <FormItem
+          label="邮箱"
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 18 }}
+          hasFeedback
+        >
           {getFieldDecorator('email', {
             rules: [{
               type: 'email', message: '输入的电子邮箱无效!',
@@ -40,14 +46,19 @@ class LoginForm extends React.Component {
               required: true, message: '请输入用户名!',
             }],
           })(
-            <Input addonBefore={<Icon type="user" />} placeholder="用户名" />
+            <Input prefix={<Icon type="mail" style={{ fontSize: 13 }} />} placeholder="邮箱" />
           )}
         </FormItem>
-        <FormItem>
+        <FormItem
+          label="密码"
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 18 }}
+          hasFeedback
+        >
           {getFieldDecorator('password', {
             rules: [{ required: true, message: '请输入密码!' }],
           })(
-            <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
+            <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="密码" />
           )}
         </FormItem>
         <FormItem>
@@ -61,7 +72,7 @@ class LoginForm extends React.Component {
           <Button type="primary" htmlType="submit" className="login-form-button">
             登录
           </Button>
-          Or <a onClick={this.handleTurnRegistration}>注册新用户!</a>
+          Or <a onClick={() => this.props.turnRegistration('registration')}>注册新用户!</a>
         </FormItem>
       </Form>
     );
