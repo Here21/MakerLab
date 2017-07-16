@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { Table, Icon, Button } from 'antd';
-import ProjectCard from '../../../components/ProjectCard';
+
 import './style.scss';
 
 export default class MyLab extends Component {
+  // constructor(props, context) {
+  //   super(props, context);
+  //   this.handleAdd = this.handleAdd.bind(this);
+  // }
+
+  handleAdd() {
+    browserHistory.push('/dashboard/lab/new');
+  }
+
   render() {
     const data = this.props.data;
     const columns = [{

@@ -17,9 +17,9 @@ import SecondaryPage from '../../ui/pages/App/SecondaryPage';
 // Dashboard
 import Dashboard from '../../ui/pages/Dashboard';
 import Me from '../../ui/pages/Dashboard/Me';
-// import MyLab from '../../ui/pages/Dashboard/MyLab';
 import MyLab from '../../ui/containers/dashboard/MyLab';
 import MyCourse from '../../ui/pages/Dashboard/MyCourse';
+import LabEditor from '../../ui/pages/Dashboard/LabEditor';
 
 
 Meteor.startup(() => {
@@ -44,6 +44,7 @@ Meteor.startup(() => {
         <IndexRoute component={Me} />
         <Route path="/dashboard/me" component={Me} />
         <Route path="/dashboard/lab" component={MyLab} />
+        <Route path="/dashboard/lab/new" component={LabEditor} />
         <Route path="/dashboard/course" component={MyCourse} />
       </Route>
       <Route path="*" component={ NotFound } />
