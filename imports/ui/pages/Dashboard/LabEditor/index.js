@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 // import PropTypes from 'prop-types';
 import { Form, message, Input, Button, Upload, Icon, Select } from 'antd';
 import RichEditor from '../../../../ui/components/RichEditor';
@@ -37,6 +38,20 @@ class LabEditor extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        const data = {
+          labName: values.labName,
+          researchDirection: values.researchDirection,
+          description: ''
+        };
+        Meteor.call('Labs.add', data, err => {
+          if (err) {
+            console.log(err);
+            message.error('创建实验室失败！');
+          } else {
+            message.success('创建实验室成功！');
+            browserHistory.push('/dashboard/lab');
+          }
+        });
       }
     });
   }
@@ -52,7 +67,9 @@ class LabEditor extends Component {
   handleChange(info) {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl => this.setState({ imageUrl }));
+      getBase64(info.file.originFileObj, imageUrl =>
+        this.setState({ imageUrl })
+      );
     }
   }
 
@@ -60,21 +77,15 @@ class LabEditor extends Component {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
+      wrapperCol: { span: 14 }
     };
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
-          <FormItem
-            {...formItemLayout}
-            label="创建人"
-          >
+          <FormItem {...formItemLayout} label="创建人">
             <span className="ant-form-text">张灏哲</span>
           </FormItem>
-          <FormItem
-            label="上传封面"
-            {...formItemLayout}
-          >
+          <FormItem label="上传封面" {...formItemLayout}>
             <div className="uploader-wrapper">
               <Dragger
                 className="avatar-uploader"
@@ -91,46 +102,44 @@ class LabEditor extends Component {
               </Dragger>
             </div>
           </FormItem>
-          <FormItem
-            label="实验室名称"
-            {...formItemLayout}
-          >
+          <FormItem label="实验室名称" {...formItemLayout}>
             {getFieldDecorator('labName', {
-              rules: [{
-                type: 'string', message: 'The input is not valid string!',
-              }, {
-                required: true, message: 'Please input your Lab Name!',
-              }],
-            })(
-            <Input placeholder="2-12位字符" />
-            )}
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label="实验室研究方向"
-          >
-            {getFieldDecorator('filed', {
               rules: [
-                { required: true, message: 'Please select your favourite colors!', type: 'array' },
-              ],
+                {
+                  type: 'string',
+                  message: 'The input is not valid string!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your Lab Name!'
+                }
+              ]
+            })(<Input placeholder="2-12位字符" />)}
+          </FormItem>
+          <FormItem {...formItemLayout} label="实验室研究方向">
+            {getFieldDecorator('researchDirection', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please select your favourite colors!',
+                  type: 'array'
+                }
+              ]
             })(
               <Select mode="multiple" placeholder="请选择一个相关方向">
-                <Option value="red">移动互联网</Option>
-                <Option value="green">物联网</Option>
-                <Option value="blue">在线教育</Option>
+                <Option value="移动互联网">移动互联网</Option>
+                <Option value="物联网">物联网</Option>
+                <Option value="在线教育">在线教育</Option>
               </Select>
             )}
           </FormItem>
-          <FormItem
-            label="实验室描述"
-            {...formItemLayout}
-          >
+          <FormItem label="实验室描述" {...formItemLayout}>
             <RichEditor />
           </FormItem>
-          <FormItem
-            wrapperCol={{ span: 12, offset: 6 }}
-          >
-            <Button type="primary" htmlType="submit">提交</Button>
+          <FormItem wrapperCol={{ span: 12, offset: 6 }}>
+            <Button type="primary" htmlType="submit">
+              提交
+            </Button>
           </FormItem>
         </Form>
       </div>
@@ -140,7 +149,6 @@ class LabEditor extends Component {
 
 const WrappedLabEditor = Form.create()(LabEditor);
 export default WrappedLabEditor;
-
 
 // NewLab.propTypes = {
 //   children: PropTypes.node,

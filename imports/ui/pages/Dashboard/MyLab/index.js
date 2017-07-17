@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import PropTypes from 'prop-types';
-import { Table, Icon, Button } from 'antd';
+import { Table, Icon, Button, Popconfirm, message } from 'antd';
+import moment from 'moment';
 
 import './style.scss';
 
@@ -15,60 +16,91 @@ export default class MyLab extends Component {
     browserHistory.push('/dashboard/lab/new');
   }
 
+  handleRemove(id) {
+    Meteor.call('Labs.remove', id, err => {
+      if (err) {
+        console.log(err);
+        message.error('删除失败！');
+      } else {
+        message.success('已删除');
+      }
+    });
+  }
+
   render() {
     const data = this.props.data;
+    console.log(data);
     const columns = [
+      { title: '序号', dataIndex: 'index' },
       {
         title: '封面',
-        dataIndex: 'img',
-        key: 'img',
-        render: src => <img style={{ width: '60px', height: '60px', objectFit: 'cover' }} src={src}/>,
+        dataIndex: 'image',
+        key: 'image',
+        render: src =>
+          <img
+            style={{ width: '60px', height: '60px', objectFit: 'cover' }}
+            src={src}
+          />
       },
       {
         title: 'Lab名称',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a href="#">{text}</a>,
+        dataIndex: 'labName',
+        render: (text, record) =>
+          <Link to={`/lab/${record.key}`}>
+            {record.labName}
+          </Link>
       },
       {
         title: '研究方向',
-        dataIndex: 'researchDirection',
-        key: 'researchDirection',
+        dataIndex: 'researchDirection'
       },
       {
         title: '赞数',
-        dataIndex: 'likes',
-        key: 'likes',
+        dataIndex: 'likes'
       },
       {
         title: '创建时间',
-        dataIndex: 'createdAt',
-        key: 'createdAt',
+        dataIndex: 'date'
       },
       {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
+        title: '操作',
+        render: (text, record) =>
           <span>
             <a href="#">编辑</a>
             <span className="ant-divider" />
-            <a href="#">删除</a>
+            <Popconfirm
+              title="确定要删除吗？"
+              onConfirm={() => this.handleRemove(record.key)}
+            >
+              <a href="#">删除</a>
+            </Popconfirm>
             <span className="ant-divider" />
             <a href="#" className="ant-dropdown-link">
               More actions <Icon type="down" />
             </a>
           </span>
-        ),
-      }];
+      }
+    ];
+
+    const dataSource = data.map((lab, index) => ({
+      key: lab._id,
+      index: index + 1,
+      labName: lab.labName || '无',
+      researchDirection:
+        lab.researchDirection.reduce((pre, cur) => cur + ',' + pre) || '无',
+      likes: lab.likes || 0,
+      date: moment(lab.createdAt).format('YYYY-MM-DD')
+    }));
+
     return (
       <div className="dashboard-mylab">
         <Button onClick={this.handleAdd}>创建实验室</Button>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={dataSource} />
       </div>
     );
   }
 }
 
 MyLab.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.array
 };

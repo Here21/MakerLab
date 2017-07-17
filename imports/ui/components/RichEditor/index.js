@@ -10,15 +10,17 @@ export default class RichEditor extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      editorState: '',
+      editorState: ''
     };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
   }
 
   onEditorStateChange(editorState) {
-    console.log(JSON.stringify(draftToHtml(convertToRaw(editorState.getCurrentContent()))));
+    console.log(
+      JSON.stringify(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    );
     this.setState({
-      editorState,
+      editorState
     });
   }
 

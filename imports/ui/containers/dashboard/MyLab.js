@@ -4,52 +4,50 @@ import { composeWithTracker } from 'react-komposer';
 import Loading from '../../components/Loading';
 import MyLab from '../../pages/Dashboard/MyLab';
 
-import Lab from '../../../api/documents/collections/lab';
-
+import Labs from '/imports/api/documents/collections/labs/';
 
 const composer = ({ params }, onData) => {
-  const userId = Meteor.userId();
-  const labs = Meteor.subscribe('labs.ownerLabs', userId);
-  const data = [
-    {
-      key: 1,
-      img: '/maker_lab_icon.png',
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-    {
-      key: 2,
-      img: '/maker_lab_icon.png',
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-    {
-      key: 3,
-      img: '/maker_lab_icon.png',
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-    {
-      key: 4,
-      img: '/maker_lab_icon.png',
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-  ];
+  const labs = Meteor.subscribe('labs.all');
+  // const data = [
+  //   {
+  //     key: 1,
+  //     img: '/maker_lab_icon.png',
+  //     name: 'MakerLab',
+  //     researchDirection: '移动互联网',
+  //     likes: 22,
+  //     createdAt: '2017-04-11'
+  //   },
+  //   {
+  //     key: 2,
+  //     img: '/maker_lab_icon.png',
+  //     name: 'MakerLab',
+  //     researchDirection: '移动互联网',
+  //     likes: 22,
+  //     createdAt: '2017-04-11'
+  //   },
+  //   {
+  //     key: 3,
+  //     img: '/maker_lab_icon.png',
+  //     name: 'MakerLab',
+  //     researchDirection: '移动互联网',
+  //     likes: 22,
+  //     createdAt: '2017-04-11'
+  //   },
+  //   {
+  //     key: 4,
+  //     img: '/maker_lab_icon.png',
+  //     name: 'MakerLab',
+  //     researchDirection: '移动互联网',
+  //     likes: 22,
+  //     createdAt: '2017-04-11'
+  //   }
+  // ];
   if (labs.ready()) {
-    const myLabs = Lab.find({ ownerId: userId });
-    onData(null, { myLabs });
+    const data = Labs.find({}).fetch();
+    onData(null, { data });
     return;
   }
-  onData(null, { data });
+  onData(null, { data: [] });
 };
 
 export default composeWithTracker(composer, Loading)(MyLab);

@@ -19,10 +19,7 @@
         "jsx": true
       }
     },
-    "plugins": [
-      "meteor",
-      "react"
-    ],
+    "plugins": ["meteor", "react"],
     "extends": [
       "airbnb/base",
       "plugin:meteor/guide",

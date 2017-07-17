@@ -1,2 +1,2 @@
-// import '../../api/documents/methods.js';
-// import '../../api/documents/server/publications.js';
+import '/imports/api/documents/collections/labs/methods.js';
+import '/imports/api/documents/collections/labs/publications.js';

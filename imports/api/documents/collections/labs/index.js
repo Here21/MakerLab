@@ -1,30 +1,42 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-const Lab = new Mongo.Collection('Lab');
-export default Lab;
+const Labs = new Mongo.Collection('labs');
 
-Lab.schema = new SimpleSchema({
+Labs.schema = new SimpleSchema({
   ownerId: {
-    type: String,
+    type: String
   },
   labName: {
+    type: String
+  },
+  image: {
     type: String,
+    optional: true
   },
   description: {
     type: String,
-    optional: true,
+    optional: true
   },
   researchDirection: {
-    type: String,
-    optional: true,
+    type: [String],
+    optional: true
   },
   likes: {
     type: Number,
-    optional: true,
+    defaultValue: 0
   },
   state: {
     type: String,
+    optional: true
+  },
+  removed: {
+    type: Boolean,
+    defaultValue: false
+  },
+  removedAt: {
+    type: Date,
+    optional: true
   },
   createdAt: {
     type: Date,
@@ -34,9 +46,9 @@ Lab.schema = new SimpleSchema({
       } else if (this.isUpsert) {
         return { $setOnInsert: new Date() };
       } else {
-        this.unset();  // Prevent user from supplying their own value
+        this.unset(); // Prevent user from supplying their own value
       }
-    },
+    }
   },
   updatedAt: {
     type: Date,
@@ -46,8 +58,10 @@ Lab.schema = new SimpleSchema({
       }
     },
     denyInsert: true,
-    optional: true,
-  },
+    optional: true
+  }
 });
 
-Lab.attachSchema(Lab.schema);
+Labs.attachSchema(Labs.schema);
+
+export default Labs;
