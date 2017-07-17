@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './style.scss';
 
@@ -13,7 +16,7 @@ export default class RichEditor extends Component {
   }
 
   onEditorStateChange(editorState) {
-    console.log(editorState);
+    console.log(JSON.stringify(draftToHtml(convertToRaw(editorState.getCurrentContent()))));
     this.setState({
       editorState,
     });
@@ -33,14 +36,5 @@ export default class RichEditor extends Component {
         />
       </div>
     );
-    // return (
-    //   <Editor
-    //     editorState={this.state.editorState}
-    //     toolbarClassName="toolbarClassName"
-    //     wrapperClassName="wrapperClassName"
-    //     editorClassName="editorClassName"
-    //     onEditorStateChange={this.onEditorStateChange}
-    //   />
-    // );
   }
 }
