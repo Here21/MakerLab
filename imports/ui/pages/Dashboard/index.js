@@ -63,7 +63,7 @@ export default class Dashboard extends Component {
               onClick={this.toggle}
             />
           </Header>
-          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff' }}>
             { this.props.children }
           </Content>
         </Layout>

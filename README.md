@@ -9,4 +9,6 @@ npm i
 meteor
 ```
 
-## 项目其他材料
+## 所用库
+[富文本编辑器](https://github.com/jpuri/react-draft-wysiwyg)
+[图片裁切](https://github.com/roadmanfong/react-cropper)
