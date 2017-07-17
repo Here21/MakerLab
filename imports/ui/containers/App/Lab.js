@@ -2,18 +2,17 @@ import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 
 import Loading from '../../components/Loading';
-import MyLab from '../../pages/Dashboard/MyLab';
+import LabPage from '../../pages/App/Lab';
 
 import Lab from '../../../api/documents/collections/lab';
 
 
 const composer = ({ params }, onData) => {
   const userId = Meteor.userId();
-  const labs = Meteor.subscribe('labs.ownerLabs', userId);
+  const labs = Meteor.subscribe('labs.valid');
   const data = [
     {
       key: 1,
-      img: '/maker_lab_icon.png',
       name: 'MakerLab',
       researchDirection: '移动互联网',
       likes: 22,
@@ -21,7 +20,6 @@ const composer = ({ params }, onData) => {
     },
     {
       key: 2,
-      img: '/maker_lab_icon.png',
       name: 'MakerLab',
       researchDirection: '移动互联网',
       likes: 22,
@@ -29,7 +27,6 @@ const composer = ({ params }, onData) => {
     },
     {
       key: 3,
-      img: '/maker_lab_icon.png',
       name: 'MakerLab',
       researchDirection: '移动互联网',
       likes: 22,
@@ -37,7 +34,6 @@ const composer = ({ params }, onData) => {
     },
     {
       key: 4,
-      img: '/maker_lab_icon.png',
       name: 'MakerLab',
       researchDirection: '移动互联网',
       likes: 22,
@@ -45,11 +41,11 @@ const composer = ({ params }, onData) => {
     },
   ];
   if (labs.ready()) {
-    const myLabs = Lab.find({ ownerId: userId });
-    onData(null, { myLabs });
+    const data = Lab.find();
+    onData(null, { data });
     return;
   }
   onData(null, { data });
 };
 
-export default composeWithTracker(composer, Loading)(MyLab);
+export default composeWithTracker(composer, Loading)(LabPage);
