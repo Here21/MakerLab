@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Form, message, Input, Button, Upload, Icon, Select } from 'antd';
-import RichEditor from '../../../../ui/components/RichEditor';
+import QuillEditor from '../../../../ui/components/QuillEditor';
+// import RichEditor from '../../../../ui/components/RichEditor';
 import './style.scss';
 
 const FormItem = Form.Item;
@@ -73,6 +74,10 @@ class LabEditor extends Component {
     }
   }
 
+  handleEditorChange(value) {
+    console.log(value);
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
@@ -134,7 +139,11 @@ class LabEditor extends Component {
             )}
           </FormItem>
           <FormItem label="实验室描述" {...formItemLayout}>
-            <RichEditor />
+            {getFieldDecorator('description', {
+              rules: [{ message: '请输入描述内容' }],
+            })(
+              <QuillEditor onChange={this.handleEditorChange}/>
+            )}
           </FormItem>
           <FormItem wrapperCol={{ span: 12, offset: 6 }}>
             <Button type="primary" htmlType="submit">
@@ -150,7 +159,7 @@ class LabEditor extends Component {
 const WrappedLabEditor = Form.create()(LabEditor);
 export default WrappedLabEditor;
 
-// NewLab.propTypes = {
-//   children: PropTypes.node,
-//   registration: PropTypes.func,
-// };
+LabEditor.propTypes = {
+  children: PropTypes.node,
+  registration: PropTypes.func,
+};

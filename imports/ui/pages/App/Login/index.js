@@ -74,7 +74,6 @@ export default class Login extends Component {
             }
           </Card>
         </div>
-        {/*{ this.props.children }*/}
       </div>
     );
   }
@@ -83,5 +82,5 @@ export default class Login extends Component {
 
 Login.propTypes = {
   children: PropTypes.node,
-  location: PropTypes.string,
+  location: PropTypes.object,
 };
