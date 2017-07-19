@@ -5,61 +5,55 @@ const Labs = new Mongo.Collection('labs');
 
 Labs.schema = new SimpleSchema({
   ownerId: {
-    type: String
+    type: String,
   },
   labName: {
-    type: String
-  },
-  image: {
     type: String,
-    optional: true
+  },
+  bgImage: {
+    type: String,
+    optional: true,
   },
   description: {
     type: String,
-    optional: true
+    optional: true,
   },
   researchDirection: {
     type: [String],
-    optional: true
+    optional: true,
   },
   likes: {
     type: Number,
-    defaultValue: 0
+    defaultValue: 0,
   },
   state: {
     type: String,
-    optional: true
+    optional: true,
   },
   removed: {
     type: Boolean,
-    defaultValue: false
+    defaultValue: false,
   },
   removedAt: {
     type: Date,
-    optional: true
+    optional: true,
   },
   createdAt: {
     type: Date,
-    autoValue: function() {
-      if (this.isInsert) {
-        return new Date();
-      } else if (this.isUpsert) {
-        return { $setOnInsert: new Date() };
-      } else {
-        this.unset(); // Prevent user from supplying their own value
-      }
-    }
+    autoValue() {
+      if (this.isInsert) return new Date();
+    },
   },
   updatedAt: {
     type: Date,
-    autoValue: function() {
+    autoValue() {
       if (this.isUpdate) {
         return new Date();
       }
     },
     denyInsert: true,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 Labs.attachSchema(Labs.schema);

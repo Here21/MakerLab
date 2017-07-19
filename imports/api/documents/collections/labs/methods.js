@@ -3,7 +3,7 @@ import { check } from 'meteor/check';
 import Labs from './index';
 
 Meteor.methods({
-  'Labs.add'(data) {
+  'Labs.add': function documentsInsert(data) {
     check(data, Object);
     if (data._id) {
       Labs.update({ _id: data._id }, { $set: { ...data } });
@@ -12,11 +12,11 @@ Meteor.methods({
       Labs.insert(data);
     }
   },
-  'Labs.remove'(id) {
+  'Labs.remove': function documentsInsert(id) {
     check(id, String);
     Labs.update(
       { _id: id },
       { $set: { removed: true, removedAt: new Date() } }
     );
-  }
+  },
 });

@@ -34,15 +34,16 @@ class LabEditor extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         const data = {
           labName: values.labName,
           researchDirection: values.researchDirection,
-          description: ''
+          description: values.description,
         };
         Meteor.call('Labs.add', data, err => {
           if (err) {
@@ -74,15 +75,11 @@ class LabEditor extends Component {
     }
   }
 
-  handleEditorChange(value) {
-    console.log(value);
-  }
-
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 4 },
-      wrapperCol: { span: 14 }
+      wrapperCol: { span: 14 },
     };
     return (
       <div>
@@ -112,13 +109,13 @@ class LabEditor extends Component {
               rules: [
                 {
                   type: 'string',
-                  message: 'The input is not valid string!'
+                  message: 'The input is not valid string!',
                 },
                 {
                   required: true,
-                  message: 'Please input your Lab Name!'
-                }
-              ]
+                  message: 'Please input your Lab Name!',
+                },
+              ],
             })(<Input placeholder="2-12位字符" />)}
           </FormItem>
           <FormItem {...formItemLayout} label="实验室研究方向">
@@ -142,7 +139,7 @@ class LabEditor extends Component {
             {getFieldDecorator('description', {
               rules: [{ message: '请输入描述内容' }],
             })(
-              <QuillEditor onChange={this.handleEditorChange}/>
+              <QuillEditor />
             )}
           </FormItem>
           <FormItem wrapperCol={{ span: 12, offset: 6 }}>
@@ -162,4 +159,5 @@ export default WrappedLabEditor;
 LabEditor.propTypes = {
   children: PropTypes.node,
   registration: PropTypes.func,
+  form: PropTypes.object,
 };
