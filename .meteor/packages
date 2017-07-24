@@ -35,3 +35,4 @@ ddp-rate-limiter@1.0.7
 shell-server@0.2.3
 base64@1.0.10
 dynamic-import
+ostrio:files
