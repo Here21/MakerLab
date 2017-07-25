@@ -1,4 +1,4 @@
-import '../../documents/collections/labs/methods.js';
-import '../../documents/collections/labs/publications.js';
-import '../../documents/collections/files/methods.js';
-import '../../documents/collections/files/publications.js';
+import '../../api/documents/collections/labs/methods';
+import '../../api/documents/collections/labs/publications.js';
+import '../../api/documents/collections/files/methods.js';
+import '../../api/documents/collections/files/publications.js';

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Meteor from 'meteor/meteor';
 import { Upload, Icon, message, Button } from 'antd';
 import Images from '../../../../imports/api/documents/collections/files';
 
@@ -31,6 +32,7 @@ class UploadAndCut extends Component {
       uploadIng: false,
       localLoad: false,
       file: null,
+      progress: null,
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.beforeUpload = this.beforeUpload.bind(this);
@@ -75,7 +77,7 @@ class UploadAndCut extends Component {
   }
 
   uploadIt() {
-    let self = this;
+    const self = this;
 
     if (this.state.file) {
       const uploadInstance = Images.insert({
@@ -95,15 +97,15 @@ class UploadAndCut extends Component {
       });
 
       // These are the event functions, don't need most of them, it shows where we are in the process
-      uploadInstance.on('start', function () {
+      uploadInstance.on('start', () => {
         console.log('Starting');
       });
 
-      uploadInstance.on('end', function (error, fileObj) {
+      uploadInstance.on('end', (error, fileObj) => {
         console.log('On end File Object: ', fileObj);
       });
 
-      uploadInstance.on('uploaded', function (error, fileObj) {
+      uploadInstance.on('uploaded', (error, fileObj) => {
         console.log('uploaded: ', fileObj);
 
         // Remove the filename from the upload box
@@ -117,16 +119,16 @@ class UploadAndCut extends Component {
         // });
       });
 
-      uploadInstance.on('error', function (error, fileObj) {
+      uploadInstance.on('error', (error, fileObj) => {
         console.log('Error during upload: ' + error);
       });
 
-      uploadInstance.on('progress', function (progress, fileObj) {
+      uploadInstance.on('progress', (progress, fileObj) => {
         console.log('Upload Percentage: ' + progress);
         // Update our progress bar
-        // self.setState({
-        //   progress: progress
-        // })
+        self.setState({
+          progress: progress
+        })
       });
 
       uploadInstance.start(); // Must manually start the upload
@@ -134,6 +136,7 @@ class UploadAndCut extends Component {
   }
 
   render() {
+    console.log(this.state.progress);
     return (
       <div style={{ marginTop: 16, height: 180 }}>
         <Dragger
