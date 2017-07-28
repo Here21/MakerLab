@@ -19,6 +19,7 @@ import Images from './index';
 //   return Images.find();
 // });
 
-Meteor.publish('files.images.all', function () {
+Meteor.publish('files.all', function () {
+  // console.log('publish', Images.find().cursor);
   return Images.find().cursor;
 });

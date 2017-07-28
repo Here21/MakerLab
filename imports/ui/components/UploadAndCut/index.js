@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Meteor from 'meteor/meteor';
 import { Upload, Icon, message, Button } from 'antd';
+import { Meteor } from 'meteor/meteor';
 import Images from '../../../../imports/api/documents/collections/files';
 
 const Dragger = Upload.Dragger;
@@ -37,8 +37,13 @@ class UploadAndCut extends Component {
     this.handleUpload = this.handleUpload.bind(this);
     this.beforeUpload = this.beforeUpload.bind(this);
     this.uploadIt = this.uploadIt.bind(this);
+    this.downloadIt = this.downloadIt.bind(this);
   }
 
+  componentDidMount() {
+    Meteor.subscribe('files.all');
+
+  }
 
   handleUpload(localFile) {
     console.log(localFile);
@@ -83,7 +88,7 @@ class UploadAndCut extends Component {
       const uploadInstance = Images.insert({
         file: this.state.file,
         meta: {
-          locator: self.props.fileLocator,
+          // locator: self.props.fileLocator,
           userId: Meteor.userId(), // Optional, used to check on server for file tampering
         },
         streams: 'dynamic',
@@ -135,6 +140,20 @@ class UploadAndCut extends Component {
     }
   }
 
+  downloadIt() {
+    // Meteor.subscribe('files.all');
+    // const file = Images.find().fetch();
+    const file = Images.findOne({ _id: 'bijtuJpM8yquyJWuL' })
+    console.log(file.link());
+    console.log(file.get());
+    // // const link = file.link();
+    // // console.log(link);
+    // // const get = file.get();
+    // // console.log(get);
+    // const result = Meteor.call('Images.findOne', 'bijtuJpM8yquyJWuL');
+    // console.log(result);
+  }
+
   render() {
     console.log(this.state.progress);
     return (
@@ -161,6 +180,13 @@ class UploadAndCut extends Component {
           onClick={this.uploadIt}
         >
           上传
+        </Button>
+        <Button
+          className="upload-demo-start"
+          type="primary"
+          onClick={this.downloadIt}
+        >
+          下载
         </Button>
       </div>
     );
