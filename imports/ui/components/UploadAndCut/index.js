@@ -1,28 +1,9 @@
 import React, { Component } from 'react';
-import { Upload, Icon, message, Button } from 'antd';
+import { Icon, message, Button } from 'antd';
+import UploadImage from '../UploadImage';
+import ImageCrop from '../ImageCrop';
 import { Meteor } from 'meteor/meteor';
 import Images from '../../../../imports/api/documents/collections/files';
-
-const Dragger = Upload.Dragger;
-
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.readAsDataURL(img);
-  reader.addEventListener('load', () => callback(reader.result));
-}
-
-function beforeUpload(file) {
-  const isJPG = file.type === 'image/jpeg';
-  if (!isJPG) {
-    message.error('You can only upload JPG file!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJPG && isLt2M;
-}
-
 
 class UploadAndCut extends Component {
   constructor(props) {
@@ -33,52 +14,15 @@ class UploadAndCut extends Component {
       localLoad: false,
       file: null,
       progress: null,
+      imageSrc: null,
     };
-    this.handleUpload = this.handleUpload.bind(this);
-    this.beforeUpload = this.beforeUpload.bind(this);
     this.uploadIt = this.uploadIt.bind(this);
     this.downloadIt = this.downloadIt.bind(this);
+    this.changeImageSrc = this.changeImageSrc.bind(this);
   }
 
   componentDidMount() {
-    Meteor.subscribe('files.all');
-
-  }
-
-  handleUpload(localFile) {
-    console.log(localFile);
-    getBase64(localFile.file.originFileObj, (imageUrl) => {
-      const test = [
-        'data:image/jpeg',
-        'data:image/png;',
-        'data:image/jpg;',
-      ];
-      if (!test.includes(imageUrl.slice(0, 15))) {
-        return message.error('必须上传jpeg格式的图片');
-      }
-      this.setState({
-        src: imageUrl,
-        localLoad: false,
-      });
-      return false;
-    });
-  }
-
-  beforeUpload(file) {
-    const isJPG = file.type === 'image/jpeg';
-    if (!isJPG) {
-      message.error('You can only upload JPG file!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
-    }
-    console.log(file);
-    // return isJPG && isLt2M;
-    this.setState({
-      file,
-    });
-    return false;
+    // Meteor.subscribe('files.all');
   }
 
   uploadIt() {
@@ -154,26 +98,20 @@ class UploadAndCut extends Component {
     // console.log(result);
   }
 
+  changeImageSrc(src) {
+    console.log(src);
+    this.setState({
+      imageSrc: src,
+    });
+  }
+
   render() {
     console.log(this.state.progress);
+    const { imageSrc } = this.state
     return (
       <div style={{ marginTop: 16, height: 180 }}>
-        <Dragger
-          name='file'
-          multiple={false}
-          showUploadList={false}
-          beforeUpload={this.beforeUpload}
-          onChange={this.handleUpload}
-        >
-          <p className='ant-upload-drag-icon'>
-            <Icon type='inbox' />
-          </p>
-          <h5 className='ant-upload-text'>
-            <span style={{ fontSize: 'larger' }}>封面图</span>
-            点击或拖拽图片到此进行截图
-          </h5>
-          <p className='ant-upload-hint'>建议图片比例16：9 - 大小小于2M - JPG格式</p>
-        </Dragger>
+        <UploadImage imageSrc={imageSrc} changeImageSrc={this.changeImageSrc} />
+        <ImageCrop imageSrc={imageSrc} changeImageSrc={this.changeImageSrc} />
         <Button
           className="upload-demo-start"
           type="primary"

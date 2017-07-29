@@ -67,6 +67,7 @@
     "prop-types": "^15.5.6",
     "react": "^15.3.2",
     "react-addons-pure-render-mixin": "^15.3.2",
+    "react-cropper": "^0.12.0",
     "react-dom": "^15.3.2",
     "react-draft-wysiwyg": "^1.10.5",
     "react-komposer": "^1.13.1",
