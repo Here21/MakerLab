@@ -14,11 +14,26 @@
   clear: both;
 }
 
+@keyframes typing {
+	0% { width: 0 }
+	50% { width: 18rem }
+	80% { width: 18rem }
+	100% { width: 0 }
+}
+
+@keyframes caret {
+	50% { border-right-color: transparent; }
+}
+
 .home__title {
   font-size: 2rem;
-  text-align: center;
   font-weight: bold;
-  margin: 5rem 0;
+  margin: 5rem auto;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: .05em solid;
+	animation: typing 4s steps(9) infinite,
+	           caret 1s steps(1) infinite;
 }
 .home__bg {
   background-image: url(https://assets-cdn.shimo.im/assets/images/home/index/video/Bitmap_2x-71b139170a.png);
