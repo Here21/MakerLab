@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Upload, Icon, message, Button } from 'antd';
+import { Upload, Icon, message } from 'antd';
 import PropTypes from 'prop-types';
+import './style.scss';
 
 const Dragger = Upload.Dragger;
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.readAsDataURL(img);
-  reader.addEventListener('load', () => callback(reader.result));
-}
+// function getBase64(img, callback) {
+//   const reader = new FileReader();
+//   reader.readAsDataURL(img);
+//   reader.addEventListener('load', () => callback(reader.result));
+// }
 
 function checkImage(file) {
-  console.log(file.type);
   // 条件
   const isLt2M = file.size / 1024 / 1024 < 2;
   const test = [
@@ -41,42 +41,38 @@ class UploadAndCut extends Component {
       file: null,
       progress: null,
     };
-    this.handleUpload = this.handleUpload.bind(this);
     this.beforeUpload = this.beforeUpload.bind(this);
-  }
-
-  handleUpload(localFile) {
-    console.log(localFile);
-    getBase64(localFile.file.originFileObj, (imageUrl) => {
-      this.props.changeImageSrc(imageUrl);
-      return false;
-    });
   }
 
   beforeUpload(file) {
     if (!checkImage(file)) return;
-    getBase64(file, (imageUrl) => {
-      this.props.changeImageSrc(imageUrl);
-    });
+    const imageSrc = window.URL.createObjectURL(file);
+    this.props.changeImageSrc(imageSrc);
   }
 
   render() {
+    const { loadPath } = this.props;
     return (
-      <div style={{ marginTop: 16, height: 180 }}>
+      <div className="upload-image-wrap">
         <Dragger
           name='file'
           multiple={false}
           showUploadList={false}
           beforeUpload={this.beforeUpload}
         >
-          <p className='ant-upload-drag-icon'>
-            <Icon type='inbox' />
-          </p>
-          <h5 className='ant-upload-text'>
-            <span style={{ fontSize: 'larger' }}>封面图</span>
-            点击或拖拽图片到此进行截图
-          </h5>
-          <p className='ant-upload-hint'>建议图片比例16：9 - 大小小于2M - JPG格式</p>
+          {
+            loadPath ? <img src={loadPath} alt=""/> :
+              <div>
+                <p className='ant-upload-drag-icon'>
+                  <Icon type='inbox' />
+                </p>
+                <h5 className='ant-upload-text'>
+                  <span style={{ fontSize: 'larger' }}>封面图</span>
+                  点击或拖拽图片到此进行截图
+                </h5>
+                <p className='ant-upload-hint'>建议图片比例16：9 - 大小小于2M - JPG格式</p>
+              </div>
+          }
         </Dragger>
       </div>
     );
@@ -87,6 +83,7 @@ class UploadAndCut extends Component {
 UploadAndCut.propTypes = {
   imageSrc: PropTypes.string,
   changeImageSrc: PropTypes.func,
+  loadPath: PropTypes.string,
 };
 
 

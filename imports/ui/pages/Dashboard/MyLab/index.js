@@ -34,13 +34,13 @@ export default class MyLab extends Component {
       { title: '序号', dataIndex: 'index' },
       {
         title: '封面',
-        dataIndex: 'image',
-        key: 'image',
-        render: src =>
+        dataIndex: 'coverSrc',
+        key: 'coverSrc',
+        render: coverSrc =>
           <img
             style={{ width: '60px', height: '60px', objectFit: 'cover' }}
-            src={src}
-          />
+            src={coverSrc}
+          />,
       },
       {
         title: 'Lab名称',
@@ -48,19 +48,19 @@ export default class MyLab extends Component {
         render: (text, record) =>
           <Link to={`/lab/${record.key}`}>
             {record.labName}
-          </Link>
+          </Link>,
       },
       {
         title: '研究方向',
-        dataIndex: 'researchDirection'
+        dataIndex: 'researchDirection',
       },
       {
         title: '赞数',
-        dataIndex: 'likes'
+        dataIndex: 'likes',
       },
       {
         title: '创建时间',
-        dataIndex: 'date'
+        dataIndex: 'date',
       },
       {
         title: '操作',
@@ -78,8 +78,8 @@ export default class MyLab extends Component {
             <a href="#" className="ant-dropdown-link">
               More actions <Icon type="down" />
             </a>
-          </span>
-      }
+          </span>,
+      },
     ];
 
     const dataSource = data.map((lab, index) => ({
@@ -89,7 +89,8 @@ export default class MyLab extends Component {
       researchDirection:
         lab.researchDirection.reduce((pre, cur) => cur + ',' + pre) || '无',
       likes: lab.likes || 0,
-      date: moment(lab.createdAt).format('YYYY-MM-DD')
+      date: moment(lab.createdAt).format('YYYY-MM-DD'),
+      coverSrc: lab.coverSrc,
     }));
 
     return (

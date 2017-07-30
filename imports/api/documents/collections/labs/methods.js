@@ -5,12 +5,11 @@ import Labs from './index';
 Meteor.methods({
   'Labs.add': function documentsInsert(data) {
     check(data, Object);
-    if (data._id) {
-      Labs.update({ _id: data._id }, { $set: { ...data } });
-    } else {
-      data.ownerId = this.userId || 'ddd';
-      Labs.insert(data);
-    }
+    Labs.insert(data);
+  },
+  'Labs.edit': function documentsInsert(data) {
+    check(data, Object);
+    Labs.update({ _id: data._id }, { $set: { ...data } });
   },
   'Labs.remove': function documentsInsert(id) {
     check(id, String);

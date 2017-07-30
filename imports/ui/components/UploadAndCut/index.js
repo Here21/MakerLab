@@ -1,134 +1,117 @@
 import React, { Component } from 'react';
-import { Icon, message, Button } from 'antd';
+import { message, Button } from 'antd';
+import PropTypes from 'prop-types';
 import UploadImage from '../UploadImage';
 import ImageCrop from '../ImageCrop';
-import { Meteor } from 'meteor/meteor';
 import Images from '../../../../imports/api/documents/collections/files';
+import './style.scss';
 
 class UploadAndCut extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
-      src: null,
-      uploadIng: false,
-      localLoad: false,
-      file: null,
+      cutDone: false,
+      coverId: null,
       progress: null,
       imageSrc: null,
+      loadPath: null,
     };
-    this.uploadIt = this.uploadIt.bind(this);
-    this.downloadIt = this.downloadIt.bind(this);
+
     this.changeImageSrc = this.changeImageSrc.bind(this);
+    this.handleTailor = this.handleTailor.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   componentDidMount() {
     // Meteor.subscribe('files.all');
   }
 
-  uploadIt() {
-    const self = this;
-
-    if (this.state.file) {
-      const uploadInstance = Images.insert({
-        file: this.state.file,
-        meta: {
-          // locator: self.props.fileLocator,
-          userId: Meteor.userId(), // Optional, used to check on server for file tampering
-        },
-        streams: 'dynamic',
-        chunkSize: 'dynamic',
-        allowWebWorkers: true // If you see issues with uploads, change this to false
-      }, false);
-
-      self.setState({
-        uploading: uploadInstance, // Keep track of this instance to use below
-        inProgress: true // Show the progress bar now
-      });
-
-      // These are the event functions, don't need most of them, it shows where we are in the process
-      uploadInstance.on('start', () => {
-        console.log('Starting');
-      });
-
-      uploadInstance.on('end', (error, fileObj) => {
-        console.log('On end File Object: ', fileObj);
-      });
-
-      uploadInstance.on('uploaded', (error, fileObj) => {
-        console.log('uploaded: ', fileObj);
-
-        // Remove the filename from the upload box
-        // self.refs['fileinput'].value = '';
-
-        // Reset our state for the next file
-        // self.setState({
-        //   uploading: [],
-        //   progress: 0,
-        //   inProgress: false
-        // });
-      });
-
-      uploadInstance.on('error', (error, fileObj) => {
-        console.log('Error during upload: ' + error);
-      });
-
-      uploadInstance.on('progress', (progress, fileObj) => {
-        console.log('Upload Percentage: ' + progress);
-        // Update our progress bar
-        self.setState({
-          progress: progress
-        })
-      });
-
-      uploadInstance.start(); // Must manually start the upload
-    }
-  }
-
-  downloadIt() {
-    // Meteor.subscribe('files.all');
-    // const file = Images.find().fetch();
-    const file = Images.findOne({ _id: 'bijtuJpM8yquyJWuL' })
-    console.log(file.link());
-    console.log(file.get());
-    // // const link = file.link();
-    // // console.log(link);
-    // // const get = file.get();
-    // // console.log(get);
-    // const result = Meteor.call('Images.findOne', 'bijtuJpM8yquyJWuL');
-    // console.log(result);
-  }
-
   changeImageSrc(src) {
-    console.log(src);
     this.setState({
       imageSrc: src,
     });
   }
 
+  handleTailor(dataUrl) {
+    const self = this;
+    const uploader = Images.insert({
+      file: dataUrl,
+      isBase64: true, // <— Mandatory
+      fileName: 'cover.jpeg', // <— Mandatory
+    }, false);
+
+    uploader.on('uploaded', (error, fileObj) => {
+      if (!error) {
+        message.success('上传成功！');
+        const loadLink = Images.link(fileObj);
+        self.setState({
+          loadPath: loadLink,
+          imageSrc: null,
+          cutDone: true,
+          coverId: fileObj._id,
+        });
+        self.props.getCoverId({ loadLink, coverId: fileObj._id });
+      }
+    });
+
+    uploader.on('error', (error, fileObj) => {
+      message.error('上传失败！');
+      self.setState({
+        imageSrc: null,
+      });
+    });
+
+    uploader.start();
+  }
+
+  handleCancel() {
+    Images.remove({ _id: this.state.coverId }, (err) => {
+      console.log(err);
+    });
+    this.setState({
+      cutDone: false,
+      coverId: null,
+      imageSrc: null,
+      loadPath: null,
+    });
+  }
+
   render() {
-    console.log(this.state.progress);
-    const { imageSrc } = this.state
+    const { imageSrc, cutDone, loadPath } = this.state;
     return (
-      <div style={{ marginTop: 16, height: 180 }}>
-        <UploadImage imageSrc={imageSrc} changeImageSrc={this.changeImageSrc} />
-        <ImageCrop imageSrc={imageSrc} changeImageSrc={this.changeImageSrc} />
-        <Button
-          className="upload-demo-start"
-          type="primary"
-          onClick={this.uploadIt}
-        >
-          上传
-        </Button>
-        <Button
-          className="upload-demo-start"
-          type="primary"
-          onClick={this.downloadIt}
-        >
-          下载
-        </Button>
+      <div className="upload-cut-warp">
+        {
+          imageSrc ?
+            <ImageCrop
+              imageSrc={imageSrc}
+              changeImageSrc={this.changeImageSrc}
+              handleTailor={this.handleTailor}
+            />
+            : <UploadImage
+              imageSrc={imageSrc}
+              loadPath={loadPath}
+              changeImageSrc={this.changeImageSrc}
+            />
+        }
+        {
+          cutDone ?
+            <div className="upload-btn-group">
+              <Button
+                className="btn"
+                type="primary"
+                onClick={this.handleCancel}
+              >
+                删除重选
+              </Button>
+            </div> : ''
+        }
       </div>
     );
   }
 }
+
+UploadAndCut.propTypes = {
+  getCoverId: PropTypes.func,
+};
 
 export default UploadAndCut;

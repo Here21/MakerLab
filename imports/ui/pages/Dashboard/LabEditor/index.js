@@ -10,35 +10,25 @@ import './style.scss';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-// function getBase64(img, callback) {
-//   const reader = new FileReader();
-//   reader.addEventListener('load', () => callback(reader.result));
-//   reader.readAsDataURL(img);
-// }
-
-// function beforeUpload(file) {
-//   const isJPG = file.type === 'image/jpeg';
-//   if (!isJPG) {
-//     message.error('You can only upload JPG file!');
-//   }
-//   const isLt2M = file.size / 1024 / 1024 < 2;
-//   if (!isLt2M) {
-//     message.error('Image must smaller than 2MB!');
-//   }
-//   return isJPG && isLt2M;
-// }
-
 class LabEditor extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cover: null,
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getCoverId = this.getCoverId.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state.cover);
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const data = {
+          ownerId: Meteor.userId(),
+          coverId: this.state.cover.coverId,
+          coverSrc: this.state.cover.loadLink,
           labName: values.labName,
           researchDirection: values.researchDirection,
           description: values.description,
@@ -55,12 +45,11 @@ class LabEditor extends Component {
     });
   }
 
-  normFile(e) {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
+  getCoverId(cover) {
+    console.log(cover);
+    this.setState({
+      cover,
+    });
   }
 
   render() {
@@ -77,7 +66,7 @@ class LabEditor extends Component {
           </FormItem>
           <FormItem label="上传封面" {...formItemLayout}>
             <div className="uploader-wrapper">
-              <UploadAndCut />
+              <UploadAndCut getCoverId={this.getCoverId} />
             </div>
           </FormItem>
           <FormItem label="实验室名称" {...formItemLayout}>

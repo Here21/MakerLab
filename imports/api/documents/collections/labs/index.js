@@ -10,7 +10,11 @@ Labs.schema = new SimpleSchema({
   labName: {
     type: String,
   },
-  bgImage: {
+  coverId: {
+    type: String,
+    optional: true,
+  },
+  coverSrc: {
     type: String,
     optional: true,
   },
