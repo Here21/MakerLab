@@ -7,3 +7,83 @@
 .Test {
   background-color: aquamarine;
 }
+
+.clear:before {
+  content: ' ';
+  display: table;
+  clear: both;
+}
+
+@keyframes typing {
+	0% { width: 0 }
+	50% { width: 18rem }
+	80% { width: 18rem }
+	100% { width: 0 }
+}
+
+@keyframes caret {
+	50% { border-right-color: transparent; }
+}
+
+.home__title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 5rem auto;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: .05em solid;
+	animation: typing 4s steps(9) infinite,
+	           caret 1s steps(1) infinite;
+}
+.home__bg {
+  background-image: url(https://assets-cdn.shimo.im/assets/images/home/index/video/Bitmap_2x-71b139170a.png);
+  background-size: 1280px 800px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 800px;
+}
+.home__image {
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  background-size: 500px 360px;
+  width: 500px;
+  height: 360px;
+  vertical-align: top;
+}
+.home__image-01 {
+  background-image: url(https://assets-cdn.shimo.im/assets/images/home/index/pic04_1_2x-7df3c0bf69.png);
+}
+.home__image-01 {
+  background-image: url(https://assets-cdn.shimo.im/assets/images/home/index/pic04_2_2x-de896e823f.png);
+}
+.home__image-01 {
+  background-image: url(https://assets-cdn.shimo.im/assets/images/home/index/pic04_3_2x-52bbfc0b3f.png);
+}
+
+.home__desc-container {
+  text-align: center;
+  margin-top: 6rem;
+}
+.home__desc {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  height: 360px;
+}
+.home__desc_right {
+  padding-left: 5rem;
+}
+.home__desc_left {
+  padding-right: 5rem;
+}
+.home__desc-title {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 40px;
+}
+.home__desc-content {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
