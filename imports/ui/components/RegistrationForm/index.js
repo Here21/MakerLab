@@ -20,7 +20,6 @@ class RegistrationForm extends React.Component {
     this.checkConfirm = this.checkConfirm.bind(this);
     this.checkPassword = this.checkPassword.bind(this);
     this.handleConfirmBlur = this.handleConfirmBlur.bind(this);
-
   }
 
   handleSubmit(e) {
@@ -100,9 +99,9 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('email', {
             rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
+              type: 'email', message: '不是有效的邮箱格式!',
             }, {
-              required: true, message: 'Please input your E-mail!',
+              required: true, message: '请输入您的邮箱！',
             }],
           })(
             <Input />
@@ -113,10 +112,16 @@ class RegistrationForm extends React.Component {
           label="性别"
           hasFeedback
         >
-          <RadioGroup defaultValue="Male">
-            <RadioButton value="Male">男</RadioButton>
-            <RadioButton value="Female">女</RadioButton>
-          </RadioGroup>
+          {getFieldDecorator('gender', {
+            rules: [{
+              required: true, message: '请选择您的性别',
+            }],
+          })(
+            <RadioGroup>
+              <RadioButton value="Male">男</RadioButton>
+              <RadioButton value="Female">女</RadioButton>
+            </RadioGroup>
+          )}
         </FormItem>
         <FormItem
           {...formItemLayout}
@@ -125,7 +130,7 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('password', {
             rules: [{
-              required: true, message: 'Please input your password!',
+              required: true, message: '请输入密码！',
             }, {
               validator: this.checkConfirm,
             }],
@@ -140,7 +145,7 @@ class RegistrationForm extends React.Component {
         >
           {getFieldDecorator('confirm', {
             rules: [{
-              required: true, message: 'Please confirm your password!',
+              required: true, message: '请确认密码！',
             }, {
               validator: this.checkPassword,
             }],
@@ -153,7 +158,7 @@ class RegistrationForm extends React.Component {
           label={(
             <span>
               Nickname&nbsp;
-              <Tooltip title="What do you want other to call you?">
+              <Tooltip title="告诉其他人您的昵称">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
@@ -161,7 +166,7 @@ class RegistrationForm extends React.Component {
           hasFeedback
         >
           {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+            rules: [{ required: true, message: '请输入您的昵称!', whitespace: true }],
           })(
             <Input />
           )}
@@ -180,6 +185,10 @@ class RegistrationForm extends React.Component {
     );
   }
 }
+
+RegistrationForm.defaultProps = {
+  form: PropTypes.node,
+};
 
 RegistrationForm.propTypes = {
   turnLogin: PropTypes.func,

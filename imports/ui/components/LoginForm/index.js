@@ -79,6 +79,10 @@ class LoginForm extends React.Component {
   }
 }
 
+LoginForm.defaultProps = {
+  form: PropTypes.node,
+};
+
 LoginForm.propTypes = {
   turnRegistration: PropTypes.func,
   login: PropTypes.func,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
-import { Card } from 'antd';
+import { Card, message } from 'antd';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import LoginForm from '../../../components/LoginForm';
@@ -21,11 +21,12 @@ export default class Login extends Component {
   onHandleLogin(value) {
     Meteor.loginWithPassword(value.email, value.password, (error) => {
       if (error) {
-        console.log(error)
-        // TODO: 使用提示组件提示错误
+        console.log(error);
+        message.error(`登录失败, 出错原因：${error.reason}`);
         return;
       }
       // TODO: 使用提示组件提示登录成功，并设置setTimeOut
+      message.success('登录成功');
       browserHistory.push('/dashboard');
     });
   }
@@ -35,17 +36,21 @@ export default class Login extends Component {
       email: values.email,
       password: values.password,
       profile: {
-        nickName: values.nickName,
+        nickName: values.nickname,
         gender: values.gender,
       },
     };
     Accounts.createUser(userInfo, (error) => {
       if (error) {
         console.log(error);
+        message.error(`注册失败 原因：${error.reason}`);
         return;
       }
-      // TODO: 使用提示组件提示登录成功，并设置setTimeOut
-      browserHistory.push('/dashboard');
+
+      message.success('恭喜您注册成功，三秒钟后跳转到控制面板');
+      setTimeout(() => {
+        browserHistory.push('/dashboard');
+      }, 3000);
     });
   }
 

@@ -9,7 +9,7 @@ Meteor.publish('labs.all', () => {
   );
 });
 
-Meteor.publish('labs.ownerLabs', userid => {
+Meteor.publish('labs.ownerLabs', (userid) => {
   check(userid, String);
   return Labs.find({ ownerId: userid });
 });

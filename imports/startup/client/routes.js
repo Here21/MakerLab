@@ -6,9 +6,11 @@ import { Meteor } from 'meteor/meteor';
 import NotFound from '../../ui/pages/NotFound.js';
 
 // App
-import App from '../../ui/pages/App';
+// import App from '../../ui/pages/App';
+import App from '../../ui/containers/App/App';
 import Home from '../../ui/pages/App/Home';
-import Lab from '../../ui/pages/App/Lab';
+// import Lab from '../../ui/pages/App/Lab';
+import Lab from '../../ui/containers/App/Lab';
 import Course from '../../ui/pages/App/Course';
 import Project from '../../ui/pages/App/Project';
 import Login from '../../ui/pages/App/Login';

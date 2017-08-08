@@ -10,12 +10,12 @@ const { Header, Content, Footer } = Layout;
 
 class App extends Component {
   render() {
-    const { location } = this.props;
+    const { location, user } = this.props;
 
     return (
     <Layout className="layout" style={{ backgroundImage: 'url("/images/subtle_white_feathers.png")' }}>
       <Header style={{ zIndex: 10, position: 'fixed', width: '100%' }}>
-        <Navigation pathname={location.pathname} />
+        <Navigation pathname={location.pathname} user={user} />
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <div style={{ width: '1200px', margin: '5rem auto' }}>

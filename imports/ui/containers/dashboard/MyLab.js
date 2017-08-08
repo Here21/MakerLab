@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 
+import Labs from '/imports/api/documents/collections/labs/';
 import Loading from '../../components/Loading';
 import MyLab from '../../pages/Dashboard/MyLab';
 
-import Labs from '/imports/api/documents/collections/labs/';
 
 const composer = ({ params }, onData) => {
   const labs = Meteor.subscribe('labs.all');

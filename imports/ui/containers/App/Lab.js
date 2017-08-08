@@ -1,51 +1,20 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
-
 import Loading from '../../components/Loading';
 import LabPage from '../../pages/App/Lab';
 
-import Lab from '../../../api/documents/collections/lab';
+import Lab from '../../../api/documents/collections/labs';
 
 
 const composer = ({ params }, onData) => {
-  const userId = Meteor.userId();
   const labs = Meteor.subscribe('labs.valid');
-  const data = [
-    {
-      key: 1,
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-    {
-      key: 2,
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-    {
-      key: 3,
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-    {
-      key: 4,
-      name: 'MakerLab',
-      researchDirection: '移动互联网',
-      likes: 22,
-      createdAt: '2017-04-11',
-    },
-  ];
+  console.log('here');
   if (labs.ready()) {
     const data = Lab.find();
-    onData(null, { data });
-    return;
+    console.log(data.fetch());
+    onData(null, { labs: data.fetch() });
   }
-  onData(null, { data });
+  // onData(null, { });
 };
 
 export default composeWithTracker(composer, Loading)(LabPage);
