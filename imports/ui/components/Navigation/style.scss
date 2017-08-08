@@ -30,4 +30,28 @@
     height: 2rem;
     line-height: 2rem;
   }
+
+  .user-block {
+    width: fit-content !important;
+    .user-panel {
+      border: 1px solid #FFF;
+      border-radius: .3rem;
+      width: fit-content;
+      height: 3rem;
+      line-height: 3rem;
+      padding: 0 8px;
+
+      img {
+        vertical-align: middle;
+      }
+
+      span {
+
+        margin-left: 8px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
 }

@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
-import { Icon } from 'antd';
 import PropTypes from 'prop-types';
 
 import './style.scss';
 
 
 class Navigation extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  userBlock(user) {
-    return (
-      <div>
-        <Icon type="smile" />
-      </div>
-    )
-  }
-
   render() {
     const { location, user } = this.props;
 
@@ -31,7 +18,13 @@ class Navigation extends Component {
           <Link to="/course" activeClassName="active" activeStyle={{ color: '#fff' }}>课程</Link>
           <Link to="/project" activeClassName="active" activeStyle={{ color: '#fff' }}>项目</Link>
           {
-            user ? this.userBlock(user) :
+            user ?
+              <Link to="/dashboard" className="user-block">
+                <div className="user-panel">
+                  <img src={user.profile.gender === 'Male' ? '/icons/boy.png' : '/icons/girl.png'} alt="虚拟头像"/>
+                  <span>{user.profile.nickName}</span>
+                </div>
+              </Link> :
               <Link to="/login" className="login-panel">
                 登录
               </Link>

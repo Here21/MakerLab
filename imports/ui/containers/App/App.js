@@ -4,9 +4,10 @@ import Loading from '../../components/Loading';
 import AppPage from '../../pages/App';
 
 const composer = ({ params }, onData) => {
-  const currentUser = Meteor.user()
+  const currentUser = Meteor.user();
   if (currentUser) {
     onData(null, { user: currentUser });
+    return;
   }
   onData(null, { user: null });
 };

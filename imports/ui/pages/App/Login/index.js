@@ -18,6 +18,13 @@ export default class Login extends Component {
     this.onHandleTransition = this.onHandleTransition.bind(this);
   }
 
+  componentDidMount() {
+    console.log(Meteor.userId());
+    if (Meteor.userId()) {
+      browserHistory.push('/dashboard');
+    }
+  }
+
   onHandleLogin(value) {
     Meteor.loginWithPassword(value.email, value.password, (error) => {
       if (error) {
