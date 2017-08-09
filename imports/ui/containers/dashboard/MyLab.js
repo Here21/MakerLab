@@ -45,9 +45,7 @@ const composer = ({ params }, onData) => {
   if (labs.ready()) {
     const data = Labs.find({}).fetch();
     onData(null, { data });
-    return;
   }
-  onData(null, { data: [] });
 };
 
 export default composeWithTracker(composer, Loading)(MyLab);

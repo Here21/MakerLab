@@ -22,7 +22,6 @@ check@1.2.5
 audit-argument-checks@1.0.7
 
 fourseven:scss@4.5.0
-aldeed:collection2
 alanning:roles
 themeteorchef:bert
 static-html@1.1.11
@@ -36,3 +35,4 @@ shell-server@0.2.4
 base64@1.0.10
 dynamic-import@0.1.1
 ostrio:files
+aldeed:collection2-core@2.0.0

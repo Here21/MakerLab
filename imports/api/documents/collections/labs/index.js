@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 
 const Labs = new Mongo.Collection('labs');
 
@@ -23,7 +23,7 @@ Labs.schema = new SimpleSchema({
     optional: true,
   },
   researchDirection: {
-    type: [String],
+    type: Array,
     optional: true,
   },
   likes: {
@@ -55,7 +55,6 @@ Labs.schema = new SimpleSchema({
         return new Date();
       }
     },
-    denyInsert: true,
     optional: true,
   },
 });

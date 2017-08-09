@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 import PropTypes from 'prop-types';
+import { Avatar } from 'antd';
 
 import './style.scss';
 
@@ -21,7 +22,7 @@ class Navigation extends Component {
             user ?
               <Link to="/dashboard" className="user-block">
                 <div className="user-panel">
-                  <img src={user.profile.gender === 'Male' ? '/icons/boy.png' : '/icons/girl.png'} alt="虚拟头像"/>
+                  <Avatar src={user.profile.gender === 'Male' ? '/icons/boy.png' : '/icons/girl.png'} />
                   <span>{user.profile.nickName}</span>
                 </div>
               </Link> :

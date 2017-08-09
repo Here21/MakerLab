@@ -186,13 +186,10 @@ class RegistrationForm extends React.Component {
   }
 }
 
-RegistrationForm.defaultProps = {
-  form: PropTypes.node,
-};
-
 RegistrationForm.propTypes = {
   turnLogin: PropTypes.func,
   registration: PropTypes.func,
+  form: PropTypes.object,
 };
 
 const WrappedRegistrationForm = Form.create()(RegistrationForm);

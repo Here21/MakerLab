@@ -58,7 +58,11 @@ class LoginForm extends React.Component {
           {getFieldDecorator('password', {
             rules: [{ required: true, message: '请输入密码!' }],
           })(
-            <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="密码" />
+            <Input
+              type="password"
+              prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+              placeholder="密码"
+            />
           )}
         </FormItem>
         <FormItem>
@@ -79,13 +83,10 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.defaultProps = {
-  form: PropTypes.node,
-};
-
 LoginForm.propTypes = {
   turnRegistration: PropTypes.func,
   login: PropTypes.func,
+  form: PropTypes.object,
 };
 
 const WrappedLoginForm = Form.create()(LoginForm);
