@@ -8,7 +8,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorHtml: this.props.editorHtml,
+      editorHtml: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }

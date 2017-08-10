@@ -25,6 +25,7 @@ class LabEditor extends Component {
     console.log(this.state.cover);
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        console.log('values', values);
         const data = {
           ownerId: Meteor.userId(),
           coverId: this.state.cover.coverId,
@@ -118,11 +119,12 @@ class LabEditor extends Component {
   }
 }
 
-const WrappedLabEditor = Form.create()(LabEditor);
-export default WrappedLabEditor;
-
 LabEditor.propTypes = {
   children: PropTypes.node,
   registration: PropTypes.func,
   form: PropTypes.object,
 };
+
+const WrappedLabEditor = Form.create()(LabEditor);
+export default WrappedLabEditor;
+

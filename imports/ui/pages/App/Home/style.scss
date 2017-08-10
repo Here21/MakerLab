@@ -26,13 +26,13 @@
 }
 
 .home__title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin: 5rem auto;
 	white-space: nowrap;
 	overflow: hidden;
 	border-right: .05em solid;
-	animation: typing 4s steps(9) infinite,
+	animation: typing 4s steps(18) infinite,
 	           caret 1s steps(1) infinite;
 }
 .home__bg {

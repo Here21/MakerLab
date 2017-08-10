@@ -26,6 +26,9 @@ Labs.schema = new SimpleSchema({
     type: Array,
     optional: true,
   },
+  'researchDirection.$': {
+    type: String,
+  },
   likes: {
     type: Number,
     defaultValue: 0,

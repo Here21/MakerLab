@@ -5,6 +5,7 @@ import Labs from './index';
 Meteor.methods({
   'Labs.add': function documentsInsert(data) {
     check(data, Object);
+    console.log(data);
     Labs.insert(data);
   },
   'Labs.edit': function documentsInsert(data) {

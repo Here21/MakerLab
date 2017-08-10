@@ -1,23 +1,11 @@
-import React, { Component } from 'react'
-// import { SectionsContainer, Section } from 'react-fullpage'
-import './style.scss'
+import React, { Component } from 'react';
+import './style.scss';
 
 export default class Home extends Component {
   render() {
-    // const options = {
-    //   sectionClassName: 'section',
-    //   anchors: ['sectionOne', 'sectionTwo', 'sectionThree'],
-    //   sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE'],
-    //   scrollBar: false,
-    //   navigation: true,
-    //   verticalAlign: false,
-    //   sectionPaddingTop: '0',
-    //   sectionPaddingBottom: '0'
-    // }
-
     return (
       <div className="clear">
-        <p className="home__title">随便打点字测试一下</p>
+        <p className="home__title">创客工坊，在线虚拟实验室</p>
         <section className="home__bg" />
 
         <section className="home__desc-container">
