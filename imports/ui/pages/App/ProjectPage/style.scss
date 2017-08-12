@@ -1,0 +1,70 @@
+.project-page {
+  margin-top: 4rem;
+  .wrap {
+    width: 100%;
+    height: 60rem;;
+
+    .cover {
+      position: absolute;
+      left: 0;
+      right: 0;
+      img {
+        width: 100%;
+        height: 624px;
+      }
+    }
+
+    .project-page-brief {
+      width: 730px;
+      height: 300px;
+      border: 1px #FAFAFA;
+      border-style: dashed;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      margin-top: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+        font-style: italic
+      }
+    }
+  }
+
+  .bottom-part {
+    //margin-top: 10rem;
+    width: 100%;
+    //background-color: #FAFAFA;
+
+    .project-part-title {
+      width: 20rem;
+      height: 3.2rem;
+      line-height: 3.2rem;
+      text-align: center;
+      border-bottom: 1px solid #272822;
+      border-top: 1px solid #272822;
+      margin: 0 auto;
+    }
+    .bottom-part-container {
+      margin: 3rem 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+  }
+}

@@ -9,9 +9,9 @@ Meteor.publish('labs.all', () => {
   );
 });
 
-Meteor.publish('labs.ownerLabs', (userid) => {
-  check(userid, String);
-  return Labs.find({ ownerId: userid });
+Meteor.publish('labs.ownerLabs', (userId) => {
+  check(userId, String);
+  return Labs.find({ ownerId: userId });
 });
 
 Meteor.publish('labs.valid', () => {

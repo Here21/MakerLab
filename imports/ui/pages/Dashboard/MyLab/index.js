@@ -103,5 +103,5 @@ export default class MyLab extends Component {
 }
 
 MyLab.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
 };

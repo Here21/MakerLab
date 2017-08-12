@@ -1,0 +1,45 @@
+import React, { Component } from 'react';
+import BusinessCard from '../../../components/BusinessCard';
+import ProjectCard from '../../../components/ProjectCard';
+import CourseCard from '../../../components/CourseCard';
+import './style.scss';
+
+export default class SecondaryPage extends Component {
+  render() {
+    return (
+      <div className="project-page">
+        <div className="wrap">
+          <div className="cover">
+            <img alt="example" src="https://cloud.githubusercontent.com/assets/1698185/18039916/f025c090-6dd9-11e6-9d86-a4d48a1bf049.png" />
+          </div>
+          <div className="project-page-brief">
+            <h1>移动互联网</h1>
+            <h2>探索移动互联网的最新技术与最佳实践</h2>
+            <h3>Created by Martin</h3>
+          </div>
+          <BusinessCard />
+        </div>
+        <div className="bottom-part">
+          <div className="inner">
+            <h1 className="project-part-title">项目展示</h1>
+            <div className="bottom-part-container">
+              {
+                [1, 2, 3, 4, 5, 6, 7].map(k => (
+                  <ProjectCard key={k} />
+                ))
+              }
+            </div>
+            <h1 className="project-part-title">专业课程</h1>
+            <div className="bottom-part-container">
+              {
+                [1, 2].map(k =>
+                  <CourseCard key={k} />
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}

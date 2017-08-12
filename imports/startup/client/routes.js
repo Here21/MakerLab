@@ -14,14 +14,17 @@ import Lab from '../../ui/containers/App/Lab';
 import Course from '../../ui/pages/App/Course';
 import Project from '../../ui/pages/App/Project';
 import Login from '../../ui/pages/App/Login';
-import SecondaryPage from '../../ui/pages/App/SecondaryPage';
+import LabPage from '../../ui/pages/App/LabPage';
+import ProjectPage from '../../ui/pages/App/ProjectPage';
 
 // Dashboard
 import Dashboard from '../../ui/pages/Dashboard';
 import ProfileSettings from '../../ui/containers/dashboard/ProfileSettings';
 import MyLab from '../../ui/containers/dashboard/MyLab';
-import MyCourse from '../../ui/pages/Dashboard/MyCourse';
+import MyCourse from '../../ui/containers/dashboard/MyCourse';
+// import MyCourse from '../../ui/pages/Dashboard/MyCourse';
 import LabEditor from '../../ui/pages/Dashboard/LabEditor';
+import CourseEditor from '../../ui/pages/Dashboard/CourseEditor';
 
 
 Meteor.startup(() => {
@@ -38,16 +41,17 @@ Meteor.startup(() => {
         <Route path="/course" component={Course} />
         <Route path="/project" component={Project} />
         <Route path="/login" component={Login} />
-        <Route path="/lab/:labId" component={SecondaryPage} />
-        <Route path="/course/:courseId" component={SecondaryPage} />
-        <Route path="/project/:projectId" component={SecondaryPage} />
+        <Route path="/lab/:labId" component={LabPage} />
+        <Route path="/course/:courseId" component={LabPage} />
+        <Route path="/project/:projectId" component={ProjectPage} />
       </Route>
       <Route component={Dashboard}>
         <IndexRoute component={ProfileSettings} />
         <Route path="/dashboard/me" component={ProfileSettings} />
         <Route path="/dashboard/lab" component={MyLab} />
-        <Route path="/dashboard/lab/new" component={LabEditor} />
         <Route path="/dashboard/course" component={MyCourse} />
+        <Route path="/dashboard/lab/new" component={LabEditor} />
+        <Route path="/dashboard/course/new" component={CourseEditor} />
       </Route>
       <Route path="*" component={ NotFound } />
     </Router>,

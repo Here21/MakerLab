@@ -1,5 +1,5 @@
-import React from 'react'
-import './style.scss'
+import React from 'react';
+import './style.scss';
 
 const SkillField = () => (
   <div className="skill-field-item">
@@ -30,4 +30,4 @@ const BusinessCard = () => (
   </div>
 )
 
-export default BusinessCard
+export default BusinessCard;

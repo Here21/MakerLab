@@ -82,7 +82,9 @@ class LabEditor extends Component {
                   message: 'Please input your Lab Name!',
                 },
               ],
-            })(<Input placeholder="2-12位字符" />)}
+            })(
+              <Input placeholder="2-12位字符" />
+            )}
           </FormItem>
           <FormItem {...formItemLayout} label="实验室研究方向">
             {getFieldDecorator('researchDirection', {

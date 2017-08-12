@@ -43,13 +43,13 @@ export default class Dashboard extends Component {
             </Menu.Item>
             <Menu.Item key="2">
               <Link to="/dashboard/lab" activeClassName="active" activeStyle={{ color: '#fff' }}>
-                <Icon type="video-camera" />
+                <Icon type="appstore-o" />
                 <span className="nav-text">实验室</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="3">
               <Link to="/dashboard/course" activeClassName="active" activeStyle={{ color: '#fff' }}>
-                <Icon type="upload" />
+                <Icon type="book" />
                 <span className="nav-text">课程</span>
               </Link>
             </Menu.Item>

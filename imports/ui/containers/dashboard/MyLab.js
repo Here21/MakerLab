@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 
-import Labs from '/imports/api/documents/collections/labs/';
+import Labs from '../../../api/documents/collections/labs';
 import Loading from '../../components/Loading';
 import MyLab from '../../pages/Dashboard/MyLab';
 

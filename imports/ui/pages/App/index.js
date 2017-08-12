@@ -18,7 +18,7 @@ class App extends Component {
         <Navigation pathname={location.pathname} user={user} />
       </Header>
       <Content style={{ padding: '0 50px' }}>
-        <div style={{ width: '1200px', margin: '5rem auto' }}>
+        <div style={{ width: '1200px', margin: '4rem auto' }}>
           { this.props.children }
         </div>
       </Content>
