@@ -53,6 +53,12 @@ export default class Dashboard extends Component {
                 <span className="nav-text">课程</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key="4">
+              <Link to="/dashboard/project" activeClassName="active" activeStyle={{ color: '#fff' }}>
+                <Icon type="rocket" />
+                <span className="nav-text">项目</span>
+              </Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
@@ -63,7 +69,7 @@ export default class Dashboard extends Component {
               onClick={this.toggle}
             />
           </Header>
-          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff' }}>
+          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', overflowY: 'auto' }}>
             { this.props.children }
           </Content>
         </Layout>

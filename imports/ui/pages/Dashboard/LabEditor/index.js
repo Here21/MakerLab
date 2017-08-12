@@ -83,7 +83,10 @@ class LabEditor extends Component {
                 },
               ],
             })(
-              <Input placeholder="2-12位字符" />
+              <Input
+                style={{ width: 300 }}
+                placeholder="2-12位字符"
+              />
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="实验室研究方向">
@@ -96,21 +99,30 @@ class LabEditor extends Component {
                 },
               ],
             })(
-              <Select mode="multiple" placeholder="请选择一个相关方向">
+              <Select
+                style={{ width: 300 }}
+                mode="multiple"
+                placeholder="请选择一个相关方向"
+              >
                 <Option value="移动互联网">移动互联网</Option>
                 <Option value="物联网">物联网</Option>
                 <Option value="在线教育">在线教育</Option>
               </Select>
             )}
           </FormItem>
-          <FormItem label="实验室描述" {...formItemLayout}>
+          <FormItem
+            label="实验室描述"
+            {...formItemLayout}
+          >
             {getFieldDecorator('description', {
               rules: [{ message: '请输入描述内容' }],
             })(
               <QuillEditor />
             )}
           </FormItem>
-          <FormItem wrapperCol={{ span: 12, offset: 6 }}>
+          <FormItem
+            wrapperCol={{ span: 12, offset: 4 }}
+          >
             <Button type="primary" htmlType="submit">
               提交
             </Button>

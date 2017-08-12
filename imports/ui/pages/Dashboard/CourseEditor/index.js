@@ -85,7 +85,7 @@ class CourseEditor extends Component {
               ],
             })(
               <Input
-                style={{ width: 200 }}
+                style={{ width: 300 }}
                 placeholder="2-12位字符"
               />
             )}
@@ -100,7 +100,7 @@ class CourseEditor extends Component {
               ],
             })(
               <Select
-                style={{ width: 200 }}
+                style={{ width: 300 }}
                 placeholder="请选择所属专业"
               >
                 <OptGroup label="软件工程系">
@@ -127,7 +127,7 @@ class CourseEditor extends Component {
               ],
             })(
               <Select
-                style={{ width: 200 }}
+                style={{ width: 300 }}
                 placeholder="请选择课程类型"
               >
                 <Option value="创新创业教育">创新创业教育</Option>
@@ -148,7 +148,7 @@ class CourseEditor extends Component {
               <QuillEditor />
             )}
           </FormItem>
-          <FormItem wrapperCol={{ span: 12, offset: 6 }}>
+          <FormItem wrapperCol={{ span: 12, offset: 4 }}>
             <Button type="primary" htmlType="submit">
               提交
             </Button>
