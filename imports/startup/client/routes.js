@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 
-import NotFound from '../../ui/pages/NotFound.js';
+import NotFound from '../../ui/pages/NotFound/index.js';
 
 // App
 // import App from '../../ui/pages/App';
