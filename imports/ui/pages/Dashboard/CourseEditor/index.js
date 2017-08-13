@@ -15,14 +15,59 @@ class CourseEditor extends Component {
     super(props);
     this.state = {
       cover: null,
+      coverInstance: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getCoverId = this.getCoverId.bind(this);
+    this.handleStartUploadCover = this.handleStartUploadCover.bind(this);
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.cover);
+    await this.state.coverInstance.start();
+    // coverInstance.on('uploaded', (error, fileObj) => {
+    //   if (!error) {
+    //     message.success('上传成功！');
+    //     const loadLink = Images.link(fileObj);
+    //     self.setState({
+    //       loadPath: loadLink,
+    //       imageSrc: null,
+    //       cutDone: true,
+    //       coverId: fileObj._id,
+    //     });
+    //     self.props.getCoverId({ loadLink, coverId: fileObj._id });
+    //   }
+    // });
+
+    const test = await new Promise((resolve, reject) => {
+      this.state.coverInstance.on('uploaded', (error, fileObj) => {
+        if (!error) {
+          message.success('上传成功！');
+          resolve(fileObj);
+        }
+        message.error('上传失败！');
+        reject(error);
+      });
+    });
+
+    // const coverObj = this.state.coverInstance.on('uploaded', (error, fileObj) => {
+    //   if (!error) {
+    //     message.success('上传成功！');
+    //     console.log(fileObj);
+    //     return fileObj;
+    //     // const loadLink = Images.link(fileObj);
+    //     // self.setState({
+    //     //   loadPath: loadLink,
+    //     //   imageSrc: null,
+    //     //   cutDone: true,
+    //     //   coverId: fileObj._id,
+    //     // });
+    //     // self.props.getCoverId({ loadLink, coverId: fileObj._id });
+    //   }
+    // });
+    // const coverObj = Meteor.wrapAsync(this.state.coverInstance.on('uploaded'), this.state.coverInstance);
+    console.log(test);
+    // console.log(this.state.cover);
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('values', values);
@@ -35,14 +80,15 @@ class CourseEditor extends Component {
           courseType: values.courseType,
           content: values.content,
         };
-        Meteor.call('Course.add', data, (error) => {
-          if (error) {
-            message.error('创建课程失败！');
-          } else {
-            message.success('创建课程成功！');
-            browserHistory.push('/dashboard/course');
-          }
-        });
+        console.log(data);
+        // Meteor.call('Course.add', data, (error) => {
+        //   if (error) {
+        //     message.error('创建课程失败！');
+        //   } else {
+        //     message.success('创建课程成功！');
+        //     browserHistory.push('/dashboard/course');
+        //   }
+        // });
       }
     });
   }
@@ -53,6 +99,13 @@ class CourseEditor extends Component {
       cover,
     });
   }
+
+  handleStartUploadCover(coverInstance) {
+    this.setState({
+      coverInstance,
+    });
+  }
+
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -68,7 +121,10 @@ class CourseEditor extends Component {
           </FormItem>
           <FormItem label="上传封面" {...formItemLayout}>
             <div className="uploader-wrapper">
-              <UploadAndCut getCoverId={this.getCoverId} />
+              <UploadAndCut
+                getCoverId={this.getCoverId}
+                handleStartUploadCover={this.handleStartUploadCover}
+              />
             </div>
           </FormItem>
           <FormItem label="课程名称" {...formItemLayout}>

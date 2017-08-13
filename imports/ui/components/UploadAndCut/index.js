@@ -34,34 +34,42 @@ class UploadAndCut extends Component {
 
   handleTailor(dataUrl) {
     const self = this;
-    const uploader = Images.insert({
+    const coverInstance = Images.insert({
       file: dataUrl,
       isBase64: true, // <— Mandatory
+      // TODO: 使用子组件回传回来的文件名命名
       fileName: 'cover.jpeg', // <— Mandatory
     }, false);
 
-    uploader.on('uploaded', (error, fileObj) => {
-      if (!error) {
-        message.success('上传成功！');
-        const loadLink = Images.link(fileObj);
-        self.setState({
-          loadPath: loadLink,
-          imageSrc: null,
-          cutDone: true,
-          coverId: fileObj._id,
-        });
-        self.props.getCoverId({ loadLink, coverId: fileObj._id });
-      }
-    });
+    this.setState({
+      loadPath: dataUrl,
+      imageSrc: null,
+      cutDone: true,
+    })
 
-    uploader.on('error', (error, fileObj) => {
+    // coverInstance.on('uploaded', (error, fileObj) => {
+    //   if (!error) {
+    //     message.success('上传成功！');
+    //     const loadLink = Images.link(fileObj);
+    //     self.setState({
+    //       loadPath: loadLink,
+    //       imageSrc: null,
+    //       cutDone: true,
+    //       coverId: fileObj._id,
+    //     });
+    //     self.props.getCoverId({ loadLink, coverId: fileObj._id });
+    //   }
+    // });
+
+    coverInstance.on('error', (error, fileObj) => {
       message.error('上传失败！');
       self.setState({
         imageSrc: null,
       });
     });
 
-    uploader.start();
+    // coverInstance.start();
+    this.props.handleStartUploadCover(coverInstance);
   }
 
   handleCancel() {
@@ -112,6 +120,7 @@ class UploadAndCut extends Component {
 
 UploadAndCut.propTypes = {
   getCoverId: PropTypes.func,
+  handleStartUploadCover: PropTypes.func,
 };
 
 export default UploadAndCut;
