@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Form, message, Input, Button, Icon, Select } from 'antd';
 import QuillEditor from '../../../../ui/components/QuillEditor';
 import UploadAndCut from '../../../../ui/components/UploadAndCut';
+import Images from '../../../../../imports/api/documents/collections/images';
 import './style.scss';
 
 const FormItem = Form.Item;
@@ -15,21 +16,36 @@ class LabEditor extends Component {
     super(props);
     this.state = {
       cover: null,
+      coverInstance: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getCoverId = this.getCoverId.bind(this);
+    this.handleStartUploadCover = this.handleStartUploadCover.bind(this);
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state.cover);
+    await this.state.coverInstance.start();
+
+    const cover = await new Promise((resolve, reject) => {
+      this.state.coverInstance.on('uploaded', (error, fileObj) => {
+        if (!error) {
+          message.success('封面上传成功！');
+          return resolve(fileObj);
+        }
+        message.error('封面上传失败！');
+        return reject(error);
+      });
+    });
+    const coverSrc = Images.link(cover);
+
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('values', values);
         const data = {
           ownerId: Meteor.userId(),
-          coverId: this.state.cover.coverId,
-          coverSrc: this.state.cover.loadLink,
+          coverId: cover._id,
+          coverSrc,
           labName: values.labName,
           researchDirection: values.researchDirection,
           description: values.description,
@@ -53,6 +69,12 @@ class LabEditor extends Component {
     });
   }
 
+  handleStartUploadCover(coverInstance) {
+    this.setState({
+      coverInstance,
+    });
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
@@ -67,7 +89,10 @@ class LabEditor extends Component {
           </FormItem>
           <FormItem label="上传封面" {...formItemLayout}>
             <div className="uploader-wrapper">
-              <UploadAndCut getCoverId={this.getCoverId} />
+              <UploadAndCut
+                getCoverId={this.getCoverId}
+                handleStartUploadCover={this.handleStartUploadCover}
+              />
             </div>
           </FormItem>
           <FormItem label="实验室名称" {...formItemLayout}>

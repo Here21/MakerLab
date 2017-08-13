@@ -3,7 +3,7 @@ import { message, Button } from 'antd';
 import PropTypes from 'prop-types';
 import UploadImage from '../UploadImage';
 import ImageCrop from '../ImageCrop';
-import Images from '../../../../imports/api/documents/collections/files';
+import Images from '../../../../imports/api/documents/collections/images';
 import './style.scss';
 
 class UploadAndCut extends Component {
@@ -33,7 +33,6 @@ class UploadAndCut extends Component {
   }
 
   handleTailor(dataUrl) {
-    const self = this;
     const coverInstance = Images.insert({
       file: dataUrl,
       isBase64: true, // <— Mandatory
@@ -45,37 +44,17 @@ class UploadAndCut extends Component {
       loadPath: dataUrl,
       imageSrc: null,
       cutDone: true,
-    })
-
-    // coverInstance.on('uploaded', (error, fileObj) => {
-    //   if (!error) {
-    //     message.success('上传成功！');
-    //     const loadLink = Images.link(fileObj);
-    //     self.setState({
-    //       loadPath: loadLink,
-    //       imageSrc: null,
-    //       cutDone: true,
-    //       coverId: fileObj._id,
-    //     });
-    //     self.props.getCoverId({ loadLink, coverId: fileObj._id });
-    //   }
-    // });
-
+    });
     coverInstance.on('error', (error, fileObj) => {
       message.error('上传失败！');
       self.setState({
         imageSrc: null,
       });
     });
-
-    // coverInstance.start();
     this.props.handleStartUploadCover(coverInstance);
   }
 
   handleCancel() {
-    Images.remove({ _id: this.state.coverId }, (err) => {
-      console.log(err);
-    });
     this.setState({
       cutDone: false,
       coverId: null,
@@ -94,8 +73,8 @@ class UploadAndCut extends Component {
               imageSrc={imageSrc}
               changeImageSrc={this.changeImageSrc}
               handleTailor={this.handleTailor}
-            />
-            : <UploadImage
+            /> :
+            <UploadImage
               imageSrc={imageSrc}
               loadPath={loadPath}
               changeImageSrc={this.changeImageSrc}

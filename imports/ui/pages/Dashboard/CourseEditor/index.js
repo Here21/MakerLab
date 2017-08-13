@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Form, message, Input, Button, Icon, Select } from 'antd';
 import QuillEditor from '../../../../ui/components/QuillEditor';
 import UploadAndCut from '../../../../ui/components/UploadAndCut';
+import Images from '../../../../../imports/api/documents/collections/images';
 import './style.scss';
 
 const FormItem = Form.Item;
@@ -24,71 +25,42 @@ class CourseEditor extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
+    // 开始上传
     await this.state.coverInstance.start();
-    // coverInstance.on('uploaded', (error, fileObj) => {
-    //   if (!error) {
-    //     message.success('上传成功！');
-    //     const loadLink = Images.link(fileObj);
-    //     self.setState({
-    //       loadPath: loadLink,
-    //       imageSrc: null,
-    //       cutDone: true,
-    //       coverId: fileObj._id,
-    //     });
-    //     self.props.getCoverId({ loadLink, coverId: fileObj._id });
-    //   }
-    // });
 
-    const test = await new Promise((resolve, reject) => {
+    const cover = await new Promise((resolve, reject) => {
       this.state.coverInstance.on('uploaded', (error, fileObj) => {
         if (!error) {
-          message.success('上传成功！');
-          resolve(fileObj);
+          message.success('封面上传成功！');
+          return resolve(fileObj);
         }
-        message.error('上传失败！');
-        reject(error);
+        message.error('封面上传失败！');
+        return reject(error);
       });
     });
+    const coverSrc = Images.link(cover);
 
-    // const coverObj = this.state.coverInstance.on('uploaded', (error, fileObj) => {
-    //   if (!error) {
-    //     message.success('上传成功！');
-    //     console.log(fileObj);
-    //     return fileObj;
-    //     // const loadLink = Images.link(fileObj);
-    //     // self.setState({
-    //     //   loadPath: loadLink,
-    //     //   imageSrc: null,
-    //     //   cutDone: true,
-    //     //   coverId: fileObj._id,
-    //     // });
-    //     // self.props.getCoverId({ loadLink, coverId: fileObj._id });
-    //   }
-    // });
-    // const coverObj = Meteor.wrapAsync(this.state.coverInstance.on('uploaded'), this.state.coverInstance);
-    console.log(test);
-    // console.log(this.state.cover);
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('values', values);
         const data = {
           ownerId: Meteor.userId(),
-          coverId: this.state.cover.coverId,
-          coverSrc: this.state.cover.loadLink,
+          coverId: cover._id,
+          coverSrc,
           courseName: values.courseName,
           department: values.department,
           courseType: values.courseType,
           content: values.content,
         };
         console.log(data);
-        // Meteor.call('Course.add', data, (error) => {
-        //   if (error) {
-        //     message.error('创建课程失败！');
-        //   } else {
-        //     message.success('创建课程成功！');
-        //     browserHistory.push('/dashboard/course');
-        //   }
-        // });
+        Meteor.call('Course.add', data, (error) => {
+          if (error) {
+            message.error('创建课程失败！');
+          } else {
+            message.success('创建课程成功！');
+            browserHistory.push('/dashboard/course');
+          }
+        });
       }
     });
   }

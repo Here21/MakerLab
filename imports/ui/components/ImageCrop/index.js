@@ -37,7 +37,7 @@ class ImageCrop extends Component {
             type="primary"
             onClick={this.handleCrop}
           >
-            裁切上传
+            确认
           </Button>
           <Button
             className="btn"
