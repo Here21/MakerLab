@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import Images from './index';
+import Files from './index';
 
 // Meteor.publish('images.all', () => {
 //   return Images.find(
@@ -19,7 +19,7 @@ import Images from './index';
 //   return Images.find();
 // });
 
-Meteor.publish('images.all', () => {
+Meteor.publish('files.all', () => {
   // console.log('publish', Images.find().cursor);
-  return Images.find().cursor;
+  return Files.find().cursor;
 });

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Form, message, Input, Button, Icon, Select } from 'antd';
 import QuillEditor from '../../../../ui/components/QuillEditor';
 import UploadAndCut from '../../../../ui/components/UploadAndCut';
+import UploadFileList from '../../../../ui/components/UploadFileList';
 import Images from '../../../../../imports/api/documents/collections/images';
 import './style.scss';
 
@@ -174,6 +175,11 @@ class CourseEditor extends Component {
               ],
             })(
               <QuillEditor />
+            )}
+          </FormItem>
+          <FormItem label="课程附件" {...formItemLayout}>
+            {getFieldDecorator('files')(
+              <UploadFileList />
             )}
           </FormItem>
           <FormItem wrapperCol={{ span: 12, offset: 4 }}>
