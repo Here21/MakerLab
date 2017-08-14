@@ -29,6 +29,13 @@ Course.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  files: {
+    type: Array,
+    optional: true,
+  },
+  'files.$': {
+    type: Object,
+  },
   likes: {
     type: Number,
     defaultValue: 0,

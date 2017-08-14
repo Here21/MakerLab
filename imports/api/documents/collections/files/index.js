@@ -1,8 +1,9 @@
 import { FilesCollection } from 'meteor/ostrio:files';
 import { Meteor } from 'meteor/meteor';
 
+// TODO: 目录的问题
 const Files = new FilesCollection({
-  storagePath: Meteor.settings.storagePath,
+  storagePath: `${Meteor.settings.storagePath}/${this.userId}`,
   debug: true,
   collectionName: 'Files',
   allowClientCode: true, // Disallow remove files from Client
@@ -11,7 +12,7 @@ const Files = new FilesCollection({
     if (file.size <= 1024 * 1024 * 30) {
       return true;
     }
-    return 'Please upload image, with size equal or less than 10MB';
+    return 'Please upload file, with size equal or less than 30MB';
   },
 });
 

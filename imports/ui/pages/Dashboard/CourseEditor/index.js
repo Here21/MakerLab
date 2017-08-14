@@ -6,7 +6,10 @@ import { Form, message, Input, Button, Icon, Select } from 'antd';
 import QuillEditor from '../../../../ui/components/QuillEditor';
 import UploadAndCut from '../../../../ui/components/UploadAndCut';
 import UploadFileList from '../../../../ui/components/UploadFileList';
+
 import Images from '../../../../../imports/api/documents/collections/images';
+import Files from '../../../../../imports/api/documents/collections/files';
+
 import './style.scss';
 
 const FormItem = Form.Item;
@@ -18,19 +21,23 @@ class CourseEditor extends Component {
     this.state = {
       cover: null,
       coverInstance: null,
+      fileList: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getCoverId = this.getCoverId.bind(this);
     this.handleStartUploadCover = this.handleStartUploadCover.bind(this);
+    this.handleFileList = this.handleFileList.bind(this);
   }
 
   async handleSubmit(e) {
     e.preventDefault();
+
+    const { coverInstance, fileList } = this.state;
     // 开始上传
     await this.state.coverInstance.start();
 
     const cover = await new Promise((resolve, reject) => {
-      this.state.coverInstance.on('uploaded', (error, fileObj) => {
+      coverInstance.on('uploaded', (error, fileObj) => {
         if (!error) {
           message.success('封面上传成功！');
           return resolve(fileObj);
@@ -40,6 +47,10 @@ class CourseEditor extends Component {
       });
     });
     const coverSrc = Images.link(cover);
+    const files = await this.fileListUpload(fileList);
+
+    console.log(files);
+
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -52,6 +63,7 @@ class CourseEditor extends Component {
           department: values.department,
           courseType: values.courseType,
           content: values.content,
+          files,
         };
         console.log(data);
         Meteor.call('Course.add', data, (error) => {
@@ -64,6 +76,38 @@ class CourseEditor extends Component {
         });
       }
     });
+  }
+
+  async fileListUpload(fileList) {
+    try {
+      if (!fileList || fileList.length < 1) {
+        message.info('没有资料上传');
+        return [];
+      }
+      const list = fileList.map((file) => {
+        const callback = {};
+        const uploader = Files.insert({
+          file,
+          streams: 'dynamic',
+          chunkSize: 'dynamic',
+        }, false);
+
+        uploader.start();
+
+        uploader.on('uploaded', (error, fileObj) => {
+          if (!error) {
+            message.success(`文件 [${fileObj.name}]上传成功！`);
+            callback.fileLink = Files.link(fileObj);
+            callback.fileId = fileObj._id;
+          } else if (error) throw new Error(error.toString());
+        });
+
+        return callback;
+      });
+      return list;
+    } catch (e) {
+      throw new Error(e.toString());
+    }
   }
 
   getCoverId(cover) {
@@ -79,6 +123,12 @@ class CourseEditor extends Component {
     });
   }
 
+  handleFileList(fileList) {
+    console.log(fileList);
+    this.setState({
+      fileList,
+    });
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -179,7 +229,7 @@ class CourseEditor extends Component {
           </FormItem>
           <FormItem label="课程附件" {...formItemLayout}>
             {getFieldDecorator('files')(
-              <UploadFileList />
+              <UploadFileList onChange={this.handleFileList} />
             )}
           </FormItem>
           <FormItem wrapperCol={{ span: 12, offset: 4 }}>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Upload, Button, Icon, message } from 'antd';
-import Files from '../../../../imports/api/documents/collections/files';
-
 
 class UploadFileList extends Component {
   constructor(props) {
@@ -15,40 +14,17 @@ class UploadFileList extends Component {
 
   handleUpload() {
     const { fileList } = this.state;
-    const formData = new FormData();
-    fileList.forEach((file) => {
-      formData.append('files[]', file);
-    });
 
     this.setState({
       uploading: true,
     });
-    console.log("fileList state : ", fileList);
-    const fileInstance = Files.insert({
-      file: fileList[0],
-      streams: 'dynamic',
-      chunkSize: 'dynamic',
-    }, false);
-    fileInstance.on('error', (error, fileObj) => {
-      message.error('上传失败！');
-      self.setState({
-        imageSrc: null,
-      });
-    });
-    fileInstance.on('uploaded', (error, fileObj) => {
-      if (error) {
-        console.log('files error', error);
-        return;
-      }
-      console.log(fileObj);
-    });
-
-    fileInstance.start();
+    const { onChange } = this.props;
+    onChange(fileList);
   }
 
   render() {
     const { uploading } = this.state;
-    const props = {
+    const uploadProps = {
       onRemove: (file) => {
         this.setState(({ fileList }) => {
           const index = fileList.indexOf(file);
@@ -60,7 +36,6 @@ class UploadFileList extends Component {
         });
       },
       beforeUpload: (file) => {
-        console.log(file);
         this.setState(({ fileList }) => ({
           fileList: [...fileList, file],
         }));
@@ -71,9 +46,10 @@ class UploadFileList extends Component {
 
     return (
       <div>
-        <Upload {...props}>
+        <Upload {...uploadProps}>
+          <p>单个文件限制大小不超过30MB</p>
           <Button>
-            <Icon type="upload" /> Select File
+            <Icon type="upload" /> 选择文件
           </Button>
         </Upload>
         <Button
@@ -81,13 +57,16 @@ class UploadFileList extends Component {
           type="primary"
           onClick={this.handleUpload}
           disabled={this.state.fileList.length === 0}
-          loading={uploading}
         >
-          {uploading ? 'Uploading' : 'Start Upload' }
+          确定
         </Button>
       </div>
     );
   }
 }
+
+UploadFileList.propsType = {
+  onChange: PropTypes.func,
+};
 
 export default UploadFileList;
