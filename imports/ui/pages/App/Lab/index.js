@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LabCard from '../../../components/LabCard';
 import './style.scss';
 
 export default class Lab extends Component {
   render() {
-    // const data = this.props.data;
-    console.log(this.proos)
+    const { labs } = this.props;
+    console.log("in to component!", labs);
     return (
       <div className="lab-page">
-        <LabCard />
-        <LabCard />
-        <LabCard />
-        <LabCard />
-        <LabCard />
-        <LabCard />
-        <LabCard />
+        {
+          labs && labs.map(lab => <LabCard key={lab._id} lab={lab} />)
+        }
       </div>
     );
   }
 }
+
+Lab.propTypes = {
+  labs: PropTypes.array,
+};

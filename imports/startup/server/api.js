@@ -5,5 +5,6 @@ import '../../api/documents/collections/images/publications.js';
 import '../../api/documents/collections/files/methods.js';
 import '../../api/documents/collections/files/publications.js';
 import '../../api/documents/collections/user/methods.js';
+import '../../api/documents/collections/user/publications.js';
 import '../../api/documents/collections/course/methods';
 import '../../api/documents/collections/course/publications.js';

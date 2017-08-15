@@ -1,53 +1,64 @@
-.lab-card-image {
-  height: 208px;
-}
+.lab-card {
 
-.lab-card-content {
-  padding: 16px;
-  height: 212px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
-  .avatar {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-  }
-
-  .user-feature {
-    width: 220px;
-    text-align: center;
-  }
-
-  .lab-introduce {
-    color: #999;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .lab-master-info {
-    display: flex;
-    align-items: center;
-    background-color: cadetblue;
-    padding: 8px;
-    transform: skew(20deg);
-
-    div, p {
-      transform: skew(-20deg)
-
+  .lab-card-image {
+    height: 208px;
+    img {
+      width: 100%;
+      height: 208px;
+      object-fit: cover;
     }
   }
 
-  .master-avatar {
+  .lab-card-content {
+    padding: 16px;
+    height: 212px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-  }
 
+    .avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+    }
+
+    .user-feature {
+      width: 220px;
+      text-align: center;
+    }
+
+    .lab-introduce {
+      color: #999;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .lab-master-info {
+      display: flex;
+      align-items: center;
+      background-color: cadetblue;
+      padding: 8px;
+      transform: skew(20deg);
+
+      div, p {
+        transform: skew(-20deg);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    .master-avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+  }
 }
 
 /*使内部文字内容不倾斜*/

@@ -5,14 +5,25 @@ import LabPage from '../../pages/App/Lab';
 
 import Lab from '../../../api/documents/collections/labs';
 
-
-const composer = ({ params }, onData) => {
+const composer = async ({ params }, onData) => {
   const labs = Meteor.subscribe('labs.valid');
-  console.log('here');
-  if (labs.ready()) {
-    const data = Lab.find();
-    console.log(data.fetch());
-    onData(null, { labs: data.fetch() });
+  const users = Meteor.subscribe('user.all');
+  console.log(users.ready());
+  if (labs.ready() && users.ready()) {
+    const data = Lab.find().fetch();
+    data.forEach((lab) => {
+      const user = Meteor.users.findOne({ _id: lab.ownerId }, { fields: { profile: 1 } });
+      console.log(user);
+      lab.user = user;
+    });
+    // const files = data.map(async (lab) => {
+    //   return new Promise((resolve, reject) => {
+    //
+    //   });
+    // });
+    // return Promise.all(files);
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    onData(null, { labs: data });
   }
   // onData(null, { });
 };
