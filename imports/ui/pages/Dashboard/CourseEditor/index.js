@@ -31,12 +31,10 @@ class CourseEditor extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-
     const { coverInstance, fileList } = this.state;
     // 开始上传
-    await this.state.coverInstance.start();
-
     const cover = await new Promise((resolve, reject) => {
+      coverInstance.start();
       coverInstance.on('uploaded', (error, fileObj) => {
         if (!error) {
           message.success('封面上传成功！');
@@ -47,14 +45,11 @@ class CourseEditor extends Component {
       });
     });
     const coverSrc = Images.link(cover);
-    const files = await this.fileListUpload(fileList);
-
-    console.log(files);
-
+    const list = await this.fileListUpload(fileList);
+    const files = list.map(file => ({ fileId: file._id, fileLink: Files.link(file) }));
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('values', values);
         const data = {
           ownerId: Meteor.userId(),
           coverId: cover._id,
@@ -65,13 +60,14 @@ class CourseEditor extends Component {
           content: values.content,
           files,
         };
-        console.log(data);
         Meteor.call('Course.add', data, (error) => {
           if (error) {
             message.error('创建课程失败！');
           } else {
             message.success('创建课程成功！');
-            browserHistory.push('/dashboard/course');
+            setTimeout(() => {
+              browserHistory.push('/dashboard/course');
+            }, 3000);
           }
         });
       }
@@ -84,27 +80,25 @@ class CourseEditor extends Component {
         message.info('没有资料上传');
         return [];
       }
-      const list = fileList.map((file) => {
-        const callback = {};
-        const uploader = Files.insert({
-          file,
-          streams: 'dynamic',
-          chunkSize: 'dynamic',
-        }, false);
-
-        uploader.start();
-
-        uploader.on('uploaded', (error, fileObj) => {
-          if (!error) {
-            message.success(`文件 [${fileObj.name}]上传成功！`);
-            callback.fileLink = Files.link(fileObj);
-            callback.fileId = fileObj._id;
-          } else if (error) throw new Error(error.toString());
+      const files = fileList.map(async (file) => {
+        return new Promise((resolve, reject) => {
+          const uploader = Files.insert({
+            file,
+            streams: 'dynamic',
+            chunkSize: 'dynamic',
+          }, false);
+          uploader.start();
+          uploader.on('uploaded', (error, fileObj) => {
+            if (!error) {
+              message.success(`材料[${fileObj.name}]上传成功！`);
+              return resolve(fileObj);
+            }
+            message.error(`材料[${fileObj.name}]上传失败！`);
+            return reject(error);
+          });
         });
-
-        return callback;
       });
-      return list;
+      return Promise.all(files);
     } catch (e) {
       throw new Error(e.toString());
     }
@@ -123,8 +117,7 @@ class CourseEditor extends Component {
     });
   }
 
-  handleFileList(fileList) {
-    console.log(fileList);
+  async handleFileList(fileList) {
     this.setState({
       fileList,
     });

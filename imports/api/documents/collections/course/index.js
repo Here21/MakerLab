@@ -35,6 +35,7 @@ Course.schema = new SimpleSchema({
   },
   'files.$': {
     type: Object,
+    blackbox: true,
   },
   likes: {
     type: Number,
