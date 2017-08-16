@@ -6,7 +6,6 @@ import './style.scss';
 export default class Lab extends Component {
   render() {
     const { labs } = this.props;
-    console.log("in to component!", labs);
     return (
       <div className="lab-page">
         {

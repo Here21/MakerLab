@@ -5,7 +5,7 @@ import Course from './index';
 Meteor.publish('course.all', () => {
   return Course.find(
     { removed: false },
-    { sort: { createdAt: -1 }, fields: { description: 0 } }
+    { sort: { createdAt: -1 }, fields: { description: 0, files: 0 } }
   );
 });
 

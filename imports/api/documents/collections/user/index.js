@@ -3,6 +3,8 @@ import { Meteor } from 'meteor/meteor';
 
 const Schema = {};
 
+const User = Meteor.users;
+
 Schema.UserProfile = new SimpleSchema({
   nickName: {
     type: String,
@@ -112,4 +114,6 @@ Schema.User = new SimpleSchema({
   },
 });
 
-Meteor.users.attachSchema(Schema.User);
+User.attachSchema(Schema.User);
+
+export default User;

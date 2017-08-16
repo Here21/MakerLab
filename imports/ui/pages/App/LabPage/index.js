@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import BusinessCard from '../../../components/BusinessCard';
 import ProjectCard from '../../../components/ProjectCard';
 import CourseCard from '../../../components/CourseCard';
 import './style.scss';
 
-export default class SecondaryPage extends Component {
+export default class LabPage extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    const { data, user } = this.props;
+    console.log(data, user);
     return (
-      <div className="project-page">
+      <div className="lab-page">
         <div className="wrap">
           <div className="cover">
-            <img alt="example" src="https://cloud.githubusercontent.com/assets/1698185/18039916/f025c090-6dd9-11e6-9d86-a4d48a1bf049.png" />
+            <div className="cover-shade"/>
+            <img alt="example" src={data.coverSrc} />
           </div>
           <div className="project-page-brief">
             <h1>移动互联网</h1>
@@ -23,19 +30,19 @@ export default class SecondaryPage extends Component {
           <div className="inner">
             <h1 className="project-part-title">项目展示</h1>
             <div className="bottom-part-container">
-              {
+              {/*
                 [1, 2, 3, 4, 5, 6, 7].map(k => (
                   <ProjectCard key={k} />
                 ))
-              }
+              */}
             </div>
             <h1 className="project-part-title">专业课程</h1>
             <div className="bottom-part-container">
-              {
+              {/*
                 [1, 2].map(k =>
                   <CourseCard key={k} />
                 )
-              }
+              */}
             </div>
           </div>
         </div>
@@ -43,3 +50,8 @@ export default class SecondaryPage extends Component {
     );
   }
 }
+
+LabPage.propTypes = {
+  data: PropTypes.object,
+  user: PropTypes.object,
+};

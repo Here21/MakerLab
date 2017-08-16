@@ -14,6 +14,11 @@ Meteor.publish('labs.ownerLabs', (userId) => {
   return Labs.find({ ownerId: userId });
 });
 
+Meteor.publish('labs.specialLabId', (labId) => {
+  check(labId, String);
+  return Labs.find({ _id: labId });
+});
+
 Meteor.publish('labs.valid', () => {
   // check(userid, String);
   return Labs.find();

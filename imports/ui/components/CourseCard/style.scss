@@ -2,6 +2,12 @@
   height: 304px;
   position: relative;
 
+  .cover {
+    width: 100%;
+    height: 304px;
+    object-fit: cover;
+  }
+
   .course-title {
     height: 3rem;
     line-height: 3rem;

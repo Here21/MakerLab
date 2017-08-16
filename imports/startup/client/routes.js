@@ -9,12 +9,11 @@ import NotFound from '../../ui/pages/NotFound/index.js';
 // import App from '../../ui/pages/App';
 import App from '../../ui/containers/App/App';
 import Home from '../../ui/pages/App/Home';
-// import Lab from '../../ui/pages/App/Lab';
 import Lab from '../../ui/containers/App/Lab';
-import Course from '../../ui/pages/App/Course';
+import Course from '../../ui/containers/App/Course';
 import Project from '../../ui/pages/App/Project';
 import Login from '../../ui/pages/App/Login';
-import LabPage from '../../ui/pages/App/LabPage';
+import LabPage from '../../ui/containers/App/LabPage';
 import ProjectPage from '../../ui/pages/App/ProjectPage';
 
 // Dashboard
@@ -22,7 +21,6 @@ import Dashboard from '../../ui/pages/Dashboard';
 import ProfileSettings from '../../ui/containers/dashboard/ProfileSettings';
 import MyLab from '../../ui/containers/dashboard/MyLab';
 import MyCourse from '../../ui/containers/dashboard/MyCourse';
-// import MyCourse from '../../ui/pages/Dashboard/MyCourse';
 import LabEditor from '../../ui/pages/Dashboard/LabEditor';
 import CourseEditor from '../../ui/pages/Dashboard/CourseEditor';
 
