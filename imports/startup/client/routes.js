@@ -14,6 +14,7 @@ import Course from '../../ui/containers/App/Course';
 import Project from '../../ui/pages/App/Project';
 import Login from '../../ui/pages/App/Login';
 import LabPage from '../../ui/containers/App/LabPage';
+import CoursePage from '../../ui/containers/App/CoursePage';
 import ProjectPage from '../../ui/pages/App/ProjectPage';
 
 // Dashboard
@@ -40,7 +41,7 @@ Meteor.startup(() => {
         <Route path="/project" component={Project} />
         <Route path="/login" component={Login} />
         <Route path="/lab/:labId" component={LabPage} />
-        <Route path="/course/:courseId" component={LabPage} />
+        <Route path="/course/:courseId" component={CoursePage} />
         <Route path="/project/:projectId" component={ProjectPage} />
       </Route>
       <Route component={Dashboard}>

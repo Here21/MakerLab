@@ -17,6 +17,11 @@ Meteor.publish('course.ownerCourse', (userId) => {
     );
 });
 
+Meteor.publish('course.findCourseById', (courseId) => {
+  check(courseId, String);
+  return Course.find({ _id: courseId });
+});
+
 Meteor.publish('course.valid', () => {
   // check(userid, String);
   return Course.find();
