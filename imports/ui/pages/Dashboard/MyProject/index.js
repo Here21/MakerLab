@@ -6,18 +6,18 @@ import moment from 'moment';
 
 import './style.scss';
 
-export default class MyLab extends Component {
+export default class MyProject extends Component {
   // constructor(props, context) {
   //   super(props, context);
   //   this.handleAdd = this.handleAdd.bind(this);
   // }
 
   handleAdd() {
-    browserHistory.push('/dashboard/lab/new');
+    browserHistory.push('/dashboard/project/new');
   }
 
   handleRemove(id) {
-    Meteor.call('Labs.remove', id, err => {
+    Meteor.call('Project.remove', id, err => {
       if (err) {
         console.log(err);
         message.error('删除失败！');
@@ -43,16 +43,20 @@ export default class MyLab extends Component {
           />,
       },
       {
-        title: 'Lab名称',
-        dataIndex: 'labName',
+        title: '项目名称',
+        dataIndex: 'projectName',
         render: (text, record) =>
-          <Link to={`/lab/${record.key}`}>
-            {record.labName}
+          <Link to={`/project/${record.key}`}>
+            {record.projectName}
           </Link>,
       },
       {
-        title: '研究方向',
-        dataIndex: 'researchDirection',
+        title: '项目分类',
+        dataIndex: 'projectSort',
+      },
+      {
+        title: '项目行业',
+        dataIndex: 'projectType',
       },
       {
         title: '赞数',
@@ -82,26 +86,26 @@ export default class MyLab extends Component {
       },
     ];
 
-    const dataSource = data && data.map((lab, index) => ({
-      key: lab._id,
+    const dataSource = data && data.map((project, index) => ({
+      key: project._id,
       index: index + 1,
-      labName: lab.labName || '无',
-      researchDirection:
-        lab.researchDirection.reduce((pre, cur) => cur + ',' + pre) || '无',
-      likes: lab.likes || 0,
-      date: moment(lab.createdAt).format('YYYY-MM-DD'),
-      coverSrc: lab.coverSrc,
+      projectName: project.projectName || '无',
+      projectSort: project.projectSort || '无',
+      projectType: project.projectType || '无',
+      likes: project.likes || 0,
+      date: moment(project.createdAt).format('YYYY-MM-DD'),
+      coverSrc: project.coverSrc,
     }));
 
     return (
-      <div className="dashboard-my-lab">
-        <Button onClick={this.handleAdd}>创建实验室</Button>
+      <div className="dashboard-my-project">
+        <Button onClick={this.handleAdd}>创建项目</Button>
         <Table columns={columns} dataSource={dataSource} />
       </div>
     );
   }
 }
 
-MyLab.propTypes = {
+MyProject.propTypes = {
   data: PropTypes.array,
 };

@@ -82,7 +82,7 @@ class LabEditor extends Component {
       wrapperCol: { span: 14 },
     };
     return (
-      <div>
+      <div className="lab-editor">
         <Form onSubmit={this.handleSubmit}>
           <FormItem {...formItemLayout} label="创建人">
             <span className="ant-form-text">张灏哲</span>

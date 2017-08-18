@@ -15,7 +15,7 @@ import './style.scss';
 const FormItem = Form.Item;
 const { Option, OptGroup } = Select;
 
-class CourseEditor extends Component {
+class ProjectEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,18 +62,19 @@ class CourseEditor extends Component {
           ownerId: Meteor.userId(),
           coverId: cover._id,
           coverSrc,
-          courseName: values.courseName,
-          department: values.department,
-          courseType: values.courseType,
+          projectName: values.projectName,
+          projectSort: values.projectSort,
+          projectType: values.projectType,
           content: values.content,
           files,
         };
-        Meteor.call('Course.add', data, (error) => {
+        Meteor.call('Project.add', data, (error) => {
           if (error) {
-            message.error('创建课程失败！');
+            message.error('创建项目失败！');
+            console.log(error);
           } else {
-            message.success('创建课程成功！');
-            browserHistory.push('/dashboard/course');
+            message.success('创建项目成功！');
+            browserHistory.push('/dashboard/project');
           }
         });
       }
@@ -111,7 +112,6 @@ class CourseEditor extends Component {
   }
 
   getCoverId(cover) {
-    console.log(cover);
     this.setState({
       cover,
     });
@@ -136,7 +136,7 @@ class CourseEditor extends Component {
       wrapperCol: { span: 14 },
     };
     return (
-      <div className="course-editor">
+      <div className="project-editor">
         <Form onSubmit={this.handleSubmit}>
           <FormItem {...formItemLayout} label="创建人">
             <span className="ant-form-text">张灏哲</span>
@@ -149,16 +149,16 @@ class CourseEditor extends Component {
               />
             </div>
           </FormItem>
-          <FormItem label="课程名称" {...formItemLayout}>
-            {getFieldDecorator('courseName', {
+          <FormItem label="项目名称" {...formItemLayout}>
+            {getFieldDecorator('projectName', {
               rules: [
                 {
                   type: 'string',
-                  message: '请检查课程名格式是否为字符串!',
+                  message: '请检查项目名格式是否为字符串!',
                 },
                 {
                   required: true,
-                  message: '请填写课程名称!',
+                  message: '请填写项目名称!',
                 },
               ],
             })(
@@ -168,65 +168,81 @@ class CourseEditor extends Component {
               />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="课程系别专业">
-            {getFieldDecorator('department', {
+          <FormItem {...formItemLayout} label="项目类别">
+            {getFieldDecorator('projectSort', {
               rules: [
                 {
                   required: true,
-                  message: '请选择课程所属专业!',
+                  message: '请选择项目所属类别!',
                 },
               ],
             })(
               <Select
                 style={{ width: 300 }}
-                placeholder="请选择所属专业"
+                placeholder="请选择所属类别"
               >
-                <OptGroup label="软件工程系">
-                  <Option value="软件工程">软件工程</Option>
-                </OptGroup>
-                <OptGroup label="数字艺术系">
-                  <Option value="数字媒体">数字媒体</Option>
-                  <Option value="视觉传达">视觉传达</Option>
-                </OptGroup>
-                <OptGroup label="计算机系">
-                  <Option value="计算机科学与技术">计算机科学与技术</Option>
-                  <Option value="网络工程">网络工程</Option>
-                </OptGroup>
+                <Option value="竞赛项目">竞赛项目</Option>
+                <Option value="创新创业">创新创业</Option>
+                <Option value="课程项目">课程项目</Option>
               </Select>
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="课程类型">
-            {getFieldDecorator('courseType', {
+          <FormItem {...formItemLayout} label="行业分类">
+            {getFieldDecorator('projectType', {
               rules: [
                 {
                   required: true,
-                  message: '请选择课程类型!',
+                  message: '请选择项目行业分类!',
                 },
               ],
             })(
               <Select
                 style={{ width: 300 }}
-                placeholder="请选择课程类型"
+                placeholder="请选择项目行业分类"
               >
-                <Option value="创新创业教育">创新创业教育</Option>
-                <Option value="项目实践">项目实践</Option>
-                <Option value="理论体系">理论体系</Option>
+                <OptGroup label="互联网">
+                  <Option value="电商">电商</Option>
+                  <Option value="社交">社交</Option>
+                  <Option value="旅游">旅游</Option>
+                  <Option value="工具">工具</Option>
+                  <Option value="共享经济">共享经济</Option>
+                  <Option value="教育">教育</Option>
+                </OptGroup>
+                <OptGroup label="硬件">
+                  <Option value="智能家居">智能家居</Option>
+                  <Option value="机器人">机器人</Option>
+                  <Option value="无人机">无人机</Option>
+                </OptGroup>
+                <OptGroup label="新兴技术">
+                  <Option value="人工智能">人工智能</Option>
+                  <Option value="虚拟现实">虚拟现实AR/VR</Option>
+                  <Option value="区块链">区块链</Option>
+                  <Option value="医疗健康">医疗健康</Option>
+                </OptGroup>
+                <OptGroup label="其他类型">
+                  <Option value="经济">经济</Option>
+                  <Option value="区块链">区块链</Option>
+                  <Option value="体育">体育</Option>
+                  <Option value="农业">农业</Option>
+                  <Option value="物流">物流</Option>
+                  <Option value="消费升级">消费升级</Option>
+                </OptGroup>
               </Select>
             )}
           </FormItem>
-          <FormItem label="课程内容" {...formItemLayout}>
+          <FormItem label="项目内容" {...formItemLayout}>
             {getFieldDecorator('content', {
               rules: [
                 {
                   required: true,
-                  message: '请输入课程内容!',
+                  message: '请输入项目内容!',
                 },
               ],
             })(
               <QuillEditor />
             )}
           </FormItem>
-          <FormItem label="课程附件" {...formItemLayout}>
+          <FormItem label="项目附件" {...formItemLayout}>
             {getFieldDecorator('files')(
               <UploadFileList onChange={this.handleFileList} />
             )}
@@ -242,12 +258,12 @@ class CourseEditor extends Component {
   }
 }
 
-CourseEditor.propTypes = {
+ProjectEditor.propTypes = {
   children: PropTypes.node,
   registration: PropTypes.func,
   form: PropTypes.object,
 };
 
-const WrappedCourseEditor = Form.create()(CourseEditor);
-export default WrappedCourseEditor;
+const WrappedProjectEditor = Form.create()(ProjectEditor);
+export default WrappedProjectEditor;
 

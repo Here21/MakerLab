@@ -86,7 +86,7 @@ export default class MyCourse extends Component {
       },
     ];
 
-    const dataSource = data.map((course, index) => ({
+    const dataSource = data && data.map((course, index) => ({
       key: course._id,
       index: index + 1,
       courseName: course.courseName || '无',
@@ -98,7 +98,7 @@ export default class MyCourse extends Component {
     }));
 
     return (
-      <div className="dashboard-mylab">
+      <div className="dashboard-my-course">
         <Button onClick={this.handleAdd}>创建课程</Button>
         <Table columns={columns} dataSource={dataSource} />
       </div>

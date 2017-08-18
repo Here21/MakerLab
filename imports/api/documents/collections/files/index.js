@@ -1,9 +1,9 @@
 import { FilesCollection } from 'meteor/ostrio:files';
 import { Meteor } from 'meteor/meteor';
 
-// TODO: 目录的问题
+// TODO: 目录管理，按照登录用户的userId去分类
 const Files = new FilesCollection({
-  storagePath: `${Meteor.settings.storagePath}/${this.userId}`,
+  storagePath: Meteor.settings.storagePath,
   debug: true,
   collectionName: 'Files',
   allowClientCode: true, // Disallow remove files from Client

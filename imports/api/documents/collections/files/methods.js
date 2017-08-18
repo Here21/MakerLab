@@ -63,6 +63,12 @@ Meteor.methods({
   //     { $set: { removed: true, removedAt: new Date() } }
   //   );
   // },
+  'Files.path': function documentsFind() {
+    const path = `${Meteor.settings.storagePath}/${this.userId}`;
+    console.log(path);
+    return path;
+
+  },
   'Files.findOne': function documentsFind(id) {
     // console.log(id);
     check(id, String);

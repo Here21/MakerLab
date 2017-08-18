@@ -22,8 +22,10 @@ import Dashboard from '../../ui/pages/Dashboard';
 import ProfileSettings from '../../ui/containers/dashboard/ProfileSettings';
 import MyLab from '../../ui/containers/dashboard/MyLab';
 import MyCourse from '../../ui/containers/dashboard/MyCourse';
+import MyProject from '../../ui/containers/dashboard/MyProject';
 import LabEditor from '../../ui/pages/Dashboard/LabEditor';
 import CourseEditor from '../../ui/pages/Dashboard/CourseEditor';
+import ProjectEditor from '../../ui/pages/Dashboard/ProjectEditor';
 
 
 Meteor.startup(() => {
@@ -49,8 +51,10 @@ Meteor.startup(() => {
         <Route path="/dashboard/me" component={ProfileSettings} />
         <Route path="/dashboard/lab" component={MyLab} />
         <Route path="/dashboard/course" component={MyCourse} />
+        <Route path="/dashboard/project" component={MyProject} />
         <Route path="/dashboard/lab/new" component={LabEditor} />
         <Route path="/dashboard/course/new" component={CourseEditor} />
+        <Route path="/dashboard/project/new" component={ProjectEditor} />
       </Route>
       <Route path="*" component={ NotFound } />
     </Router>,

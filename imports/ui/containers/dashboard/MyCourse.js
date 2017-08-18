@@ -11,7 +11,6 @@ const composer = ({ params }, onData) => {
   const course = Meteor.subscribe('course.ownerCourse', userId);
   if (course.ready()) {
     const data = Course.find({}).fetch();
-    console.log(data);
     onData(null, { data });
   }
 };

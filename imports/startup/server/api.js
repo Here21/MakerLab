@@ -8,3 +8,5 @@ import '../../api/documents/collections/user/methods.js';
 import '../../api/documents/collections/user/publications.js';
 import '../../api/documents/collections/course/methods';
 import '../../api/documents/collections/course/publications.js';
+import '../../api/documents/collections/project/methods';
+import '../../api/documents/collections/project/publications.js';
