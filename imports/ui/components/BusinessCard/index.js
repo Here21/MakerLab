@@ -10,7 +10,6 @@ const SkillField = () => (
 )
 
 const BusinessCard = ({ profile }) => {
-  console.log(profile);
   return (
     <div className="business-card">
       <img

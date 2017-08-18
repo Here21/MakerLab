@@ -21,8 +21,6 @@ const composer = async ({ params }, onData) => {
     ownerCourse.forEach((course) => {
       course.user = user;
     });
-
-    console.log(ownerCourse);
     onData(null, { data, user, courses: ownerCourse });
   }
 };

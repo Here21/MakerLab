@@ -14,7 +14,6 @@ const composer = async ({ params }, onData) => {
   if (courses.ready() && users.ready()) {
     const course = Course.findOne({ _id: courseId });
     const user = Meteor.users.findOne({ _id: course.ownerId }, { fields: { profile: 1 } });
-    console.log(user);
     onData(null, { data: course, user: user.profile });
   }
 };
