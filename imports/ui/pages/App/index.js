@@ -17,7 +17,7 @@ class App extends Component {
       <Header style={{ zIndex: 10, position: 'fixed', width: '100%' }}>
         <Navigation pathname={location.pathname} user={user} />
       </Header>
-      <Content style={{ padding: '0 50px' }}>
+      <Content style={{ padding: '0 50px', fontSize: '16px' }}>
         <div style={{ width: '1200px', margin: '4rem auto' }}>
           { this.props.children }
         </div>

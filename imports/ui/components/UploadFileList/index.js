@@ -13,6 +13,7 @@ class UploadFileList extends Component {
   }
 
   handleUpload() {
+    // TODO: 对每个上传的文件的大小在前端做一下判定
     const { fileList } = this.state;
 
     this.setState({

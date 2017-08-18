@@ -12,7 +12,6 @@ class LabPage extends Component {
 
   render() {
     const { data, user, courses } = this.props;
-    console.log(data, user);
     return (
       <div className="lab-page">
         <div className="wrap">

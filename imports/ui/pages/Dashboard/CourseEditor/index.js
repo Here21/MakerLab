@@ -46,7 +46,15 @@ class CourseEditor extends Component {
     });
     const coverSrc = Images.link(cover);
     const list = await this.fileListUpload(fileList);
-    const files = list.map(file => ({ fileId: file._id, fileLink: Files.link(file) }));
+    const files = list.map((file) => {
+      console.log(file);
+      return {
+        fileId: file._id,
+        fileLink: Files.link(file),
+        fileName: file.name,
+        type: file.type,
+      };
+    });
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -65,9 +73,7 @@ class CourseEditor extends Component {
             message.error('创建课程失败！');
           } else {
             message.success('创建课程成功！');
-            setTimeout(() => {
-              browserHistory.push('/dashboard/course');
-            }, 3000);
+            browserHistory.push('/dashboard/course');
           }
         });
       }

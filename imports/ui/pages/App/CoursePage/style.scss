@@ -26,7 +26,7 @@
       }
     }
 
-    .lab-page-brief {
+    .course-page-brief {
       width: 730px;
       height: 300px;
       border: 1px #FAFAFA;
@@ -63,23 +63,20 @@
   }
 
   .bottom-part {
-    //margin-top: 10rem;
     width: 100%;
-    //background-color: #FAFAFA;
-
-    .lab-part-title {
-      width: 20rem;
-      height: 3.2rem;
-      line-height: 3.2rem;
-      text-align: center;
-      border-bottom: 1px solid #272822;
-      border-top: 1px solid #272822;
-      margin: 0 auto;
+    .article {
+      min-height: 16rem;
+      .content {
+        font-size: 18px;
+      }
     }
-    .bottom-part-container {
-      margin: 3rem 0;
-      display: flex;
-      flex-wrap: wrap;
+
+    .file-list {
+      margin: 3rem;
+      .file-link {
+        height: 30px;
+        line-height: 30px;
+      }
     }
 
   }
