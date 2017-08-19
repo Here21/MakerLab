@@ -23,8 +23,6 @@ class ProfileSettings extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        // Meteor.user
         Meteor.call('user.update', Meteor.userId(), values, (err) => {
           if (err) {
             message.error(err.reason);

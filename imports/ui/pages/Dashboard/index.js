@@ -24,6 +24,7 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    const { location } = this.props;
     return (
       <Layout className="dashboard">
         <Sider
@@ -34,26 +35,26 @@ export default class Dashboard extends Component {
           <div className="logo">
             <p>MakerLab</p>
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={[`${location.pathname}`]}>
+            <Menu.Item key="/dashboard/me">
               <Link to="/dashboard/me" activeClassName="active" activeStyle={{ color: '#fff' }}>
                 <Icon type="user" />
                 <span className="nav-text">个人中心</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="/dashboard/lab">
               <Link to="/dashboard/lab" activeClassName="active" activeStyle={{ color: '#fff' }}>
                 <Icon type="appstore-o" />
                 <span className="nav-text">实验室</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="/dashboard/course">
               <Link to="/dashboard/course" activeClassName="active" activeStyle={{ color: '#fff' }}>
                 <Icon type="book" />
                 <span className="nav-text">课程</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="4">
+            <Menu.Item key="/dashboard/project">
               <Link to="/dashboard/project" activeClassName="active" activeStyle={{ color: '#fff' }}>
                 <Icon type="rocket" />
                 <span className="nav-text">项目</span>
@@ -81,5 +82,5 @@ export default class Dashboard extends Component {
 
 Dashboard.propTypes = {
   children: PropTypes.node,
-  registration: PropTypes.func,
+  location: PropTypes.object,
 };

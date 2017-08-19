@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Form, message, Input, Button, Icon, Select } from 'antd';
+import { Form, message, Input, Button, Select } from 'antd';
 import QuillEditor from '../../../../ui/components/QuillEditor';
 import UploadAndCut from '../../../../ui/components/UploadAndCut';
 import UploadFileList from '../../../../ui/components/UploadFileList';
@@ -29,7 +29,6 @@ class ProjectEditor extends Component {
     this.getCoverId = this.getCoverId.bind(this);
     this.handleStartUploadCover = this.handleStartUploadCover.bind(this);
     this.handleFileList = this.handleFileList.bind(this);
-    this.handleLimitBriefLength = this.handleLimitBriefLength.bind(this);
   }
 
   async handleSubmit(e) {
@@ -128,10 +127,6 @@ class ProjectEditor extends Component {
     this.setState({
       fileList,
     });
-  }
-
-  handleLimitBriefLength(value) {
-    console.log(value);
   }
 
   render() {
@@ -246,6 +241,7 @@ class ProjectEditor extends Component {
             })(
               <TextArea
                 maxLength="50"
+                rows={1}
                 style={{ width: 300 }}
                 placeholder="字数限制在50以内"
               />

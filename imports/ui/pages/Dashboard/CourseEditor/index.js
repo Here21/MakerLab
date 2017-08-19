@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Form, message, Input, Button, Icon, Select } from 'antd';
+import { Form, message, Input, Button, Select } from 'antd';
 import QuillEditor from '../../../../ui/components/QuillEditor';
 import UploadAndCut from '../../../../ui/components/UploadAndCut';
 import UploadFileList from '../../../../ui/components/UploadFileList';
@@ -47,7 +47,6 @@ class CourseEditor extends Component {
     const coverSrc = Images.link(cover);
     const list = await this.fileListUpload(fileList);
     const files = list.map((file) => {
-      console.log(file);
       return {
         fileId: file._id,
         fileLink: Files.link(file),
@@ -111,7 +110,6 @@ class CourseEditor extends Component {
   }
 
   getCoverId(cover) {
-    console.log(cover);
     this.setState({
       cover,
     });

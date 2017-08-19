@@ -4,10 +4,6 @@ import BusinessCard from '../../../components/BusinessCard';
 import './style.scss';
 
 class CoursePage extends Component {
-  constructor(props) {
-    super(props);
-  }
-  // TODO: 绑定数据
   render() {
     const { data, user } = this.props;
     return (

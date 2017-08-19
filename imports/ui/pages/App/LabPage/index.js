@@ -6,13 +6,8 @@ import CourseCard from '../../../components/CourseCard';
 import './style.scss';
 
 class LabPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { data, user, courses, projects } = this.props;
-    console.log(data);
     return (
       <div className="lab-page">
         <div className="wrap">

@@ -5,7 +5,6 @@ import './style.scss';
 
 export default class Project extends Component {
   render() {
-    console.log(this.props.projects);
     const { projects } = this.props;
     return (
       <div className="project-page">

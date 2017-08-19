@@ -5,13 +5,8 @@ import BusinessCard from '../../../components/BusinessCard';
 import './style.scss';
 
 class ProjectPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-  // TODO: 绑定数据
   render() {
     const { data, user } = this.props;
-    console.log(data, user);
     return (
       <div className="project-page">
         <div className="wrap">

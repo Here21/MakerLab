@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Form, message, Input, Button, Icon, Select } from 'antd';
+import { Form, message, Input, Button, Select } from 'antd';
 import QuillEditor from '../../../../ui/components/QuillEditor';
 import UploadAndCut from '../../../../ui/components/UploadAndCut';
 import Images from '../../../../../imports/api/documents/collections/images';
@@ -41,7 +41,6 @@ class LabEditor extends Component {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('values', values);
         const data = {
           ownerId: Meteor.userId(),
           coverId: cover._id,
@@ -63,7 +62,6 @@ class LabEditor extends Component {
   }
 
   getCoverId(cover) {
-    console.log(cover);
     this.setState({
       cover,
     });

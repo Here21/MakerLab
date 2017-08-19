@@ -8,10 +8,6 @@ const FormItem = Form.Item;
 class LoginForm extends React.Component {
   constructor(props, context) {
     super(props, context)
-    // this.state = {
-    //
-    // }
-    // this.handleTurnRegistration = this.handleTurnRegistration.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -24,10 +20,6 @@ class LoginForm extends React.Component {
       }
     });
   }
-
-  // handleTurnRegistration() {
-  //   this.props.turnRegistration();
-  // }
 
   render() {
     const { getFieldDecorator } = this.props.form;

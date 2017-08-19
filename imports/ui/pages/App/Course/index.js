@@ -6,7 +6,6 @@ import './style.scss';
 export default class Course extends Component {
   render() {
     const { courses } = this.props;
-    console.log(courses);
     return (
       <div className="course-page">
         {

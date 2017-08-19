@@ -29,7 +29,7 @@ const CourseCard = ({ course }) => (
       </div>
     </div>
   </Card>
-)
+);
 
 CourseCard.propTypes = {
   course: PropTypes.object,

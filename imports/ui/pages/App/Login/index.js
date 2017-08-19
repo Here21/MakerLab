@@ -19,7 +19,6 @@ export default class Login extends Component {
   }
 
   componentDidMount() {
-    console.log(Meteor.userId());
     if (Meteor.userId()) {
       browserHistory.push('/dashboard');
     }
@@ -32,7 +31,6 @@ export default class Login extends Component {
         message.error(`登录失败, 出错原因：${error.reason}`);
         return;
       }
-      // TODO: 使用提示组件提示登录成功，并设置setTimeOut
       message.success('登录成功');
       browserHistory.push('/dashboard');
     });

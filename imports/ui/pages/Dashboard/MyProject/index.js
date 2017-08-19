@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { browserHistory, Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { Table, Icon, Button, Popconfirm, message } from 'antd';
@@ -7,11 +8,6 @@ import moment from 'moment';
 import './style.scss';
 
 export default class MyProject extends Component {
-  // constructor(props, context) {
-  //   super(props, context);
-  //   this.handleAdd = this.handleAdd.bind(this);
-  // }
-
   handleAdd() {
     browserHistory.push('/dashboard/project/new');
   }
@@ -29,7 +25,6 @@ export default class MyProject extends Component {
 
   render() {
     const data = this.props.data;
-    console.log(data);
     const columns = [
       { title: '序号', dataIndex: 'index' },
       {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory, Link } from 'react-router';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { Table, Icon, Button, Popconfirm, message } from 'antd';
 import moment from 'moment';
@@ -29,7 +30,6 @@ export default class MyCourse extends Component {
 
   render() {
     const data = this.props.data;
-    console.log(data);
     const columns = [
       { title: '序号', dataIndex: 'index' },
       {

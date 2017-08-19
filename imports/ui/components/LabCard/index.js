@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Card, Tag } from 'antd';
+import moment from 'moment';
 import './style.scss';
 
 // TODO: 实验室点赞数，项目数量，课程数量等信息
@@ -28,8 +29,7 @@ const LabCard = ({ lab }) => (
           <p className="user-feature">{lab.user.profile.bio}</p>
         </div>
       }
-      {/*<div className="lab-state">描述描述描述</div>*/}
-      <div className="lab-state">描述描述描述</div>
+      <div className="lab-state">创建于：{moment(lab.createdAt).format('YYYY-MM-DD')}</div>
     </div>
   </Card>
 );
