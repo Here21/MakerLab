@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import ProjectCard from '../../../components/ProjectCard'
-import './style.scss'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import ProjectCard from '../../../components/ProjectCard';
+import './style.scss';
 
 export default class Project extends Component {
   render() {
+    console.log(this.props.projects);
+    const { projects } = this.props;
     return (
       <div className="project-page">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {
+          projects && projects.map(project => <ProjectCard key={project._id} project={project} />)
+        }
       </div>
-    )
+    );
   }
 }
+
+Project.propTypes = {
+  projects: PropTypes.array,
+};

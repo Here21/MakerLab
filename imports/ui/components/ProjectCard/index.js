@@ -1,28 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card } from 'antd';
+import { Link } from 'react-router';
+import moment from 'moment';
 import './style.scss';
 
-const ProjectCard = ({ user }) => (
+const ProjectCard = ({ project }) => (
   <Card style={{ width: 292, height: 340, margin: '4px 4px' }} bodyStyle={{ padding: 0 }}>
-    <div className="project-card-image">
-      <img alt="example" src="https://cloud.githubusercontent.com/assets/1698185/18039916/f025c090-6dd9-11e6-9d86-a4d48a1bf049.png" />
-      <p className="project-label">竞赛项目</p>
-    </div>
+    <Link to={`/project/${project._id}`}>
+      <div className="project-card-image">
+        <img alt="example" src={project.coverSrc} />
+        <p className="project-label">{project.projectType}</p>
+      </div>
+    </Link>
     <div className="project-card-content">
-      <h1>Lab名称</h1>
+      <h1>{project.projectName}</h1>
       <p className="project-introduce">
-        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
-        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
-        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
-        个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述个人描述
+        {project.projectBrief}
       </p>
       <div className="project-status-info">
-        <p className="project-author">MakerLab团队</p>
-        <p className="project-viewer">1271</p>
+        <p className="project-author">{project.projectSort}</p>
+        <p className="project-viewer">{moment(project.createdAt).format('YYYY-MM')}</p>
       </div>
     </div>
   </Card>
-)
+);
 
+ProjectCard.propTypes = {
+  project: PropTypes.object,
+};
 
 export default ProjectCard;

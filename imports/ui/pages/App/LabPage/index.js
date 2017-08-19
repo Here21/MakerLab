@@ -11,7 +11,8 @@ class LabPage extends Component {
   }
 
   render() {
-    const { data, user, courses } = this.props;
+    const { data, user, courses, projects } = this.props;
+    console.log(data);
     return (
       <div className="lab-page">
         <div className="wrap">
@@ -27,11 +28,16 @@ class LabPage extends Component {
           <BusinessCard profile={user.profile}/>
         </div>
         <div className="bottom-part">
+          <h1 className="title">实验室介绍</h1>
+          <div className="article">
+            <div className="content" dangerouslySetInnerHTML={{ __html: data.description }}>
+            </div>
+          </div>
           <h1 className="lab-part-title">项目展示</h1>
           <div className="bottom-part-container">
             {
-              [1, 2, 3, 4, 5, 6, 7].map(k => (
-                <ProjectCard key={k} />
+              projects.map(project => (
+                <ProjectCard key={project._id} project={project} />
               ))
             }
           </div>
@@ -52,6 +58,8 @@ class LabPage extends Component {
 LabPage.propTypes = {
   data: PropTypes.object,
   user: PropTypes.object,
+  courses: PropTypes.array,
+  projects: PropTypes.array,
 };
 
 export default LabPage;

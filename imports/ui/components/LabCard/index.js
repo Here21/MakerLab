@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 import { Card, Tag } from 'antd';
 import './style.scss';
 
+// TODO: 实验室点赞数，项目数量，课程数量等信息
+
 const LabCard = ({ lab }) => (
   <Card className="lab-card" style={{ width: 392, height: 420, margin: '4px 4px' }} bodyStyle={{ padding: 0 }}>
     <Link to={`/lab/${lab._id}`}>
@@ -26,6 +28,7 @@ const LabCard = ({ lab }) => (
           <p className="user-feature">{lab.user.profile.bio}</p>
         </div>
       }
+      {/*<div className="lab-state">描述描述描述</div>*/}
       <div className="lab-state">描述描述描述</div>
     </div>
   </Card>

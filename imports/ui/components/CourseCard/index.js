@@ -11,18 +11,6 @@ const UserAvatar = () => (
   </div>
 );
 
-// content : "<p>asdfasdfasdf</p>"
-// courseName : "iiiiiiiiiiiiiiiiiiiiii"
-// courseType : "项目实践"
-// coverId : "A6oTMhjNWXyYwHrrL"
-// coverSrc : "http://localhost:3000/cdn/storage/Images/A6oTMhjNWXyYwHrrL/original/A6oTMhjNWXyYwHrrL.jpeg"
-// createdAt : Tue Aug 15 2017 23:30:12 GMT+0800 (CST) {constructor: ƒ}
-// department : "软件工程"
-// likes : 0
-// ownerId : "s3Qzik76qJaBBodQ6"
-// removed : false
-// _id : "T4yxvzYtNreTA6Q4L"
-
 const CourseCard = ({ course }) => (
   <Card style={{ width: 592, height: 444, margin: '4px 4px' }} bodyStyle={{ padding: 0 }}>
     <Link to={`/course/${course._id}`}>

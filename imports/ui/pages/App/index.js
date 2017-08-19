@@ -18,7 +18,7 @@ class App extends Component {
         <Navigation pathname={location.pathname} user={user} />
       </Header>
       <Content style={{ padding: '0 50px', fontSize: '16px' }}>
-        <div style={{ width: '1200px', margin: '4rem auto' }}>
+        <div style={{ width: '1200px', margin: '4rem auto', minHeight: '60vh' }}>
           { this.props.children }
         </div>
       </Content>
@@ -34,6 +34,7 @@ class App extends Component {
 App.propTypes = {
   children: PropTypes.node,
   location: PropTypes.object,
+  user: PropTypes.object,
 };
 
 export default App;

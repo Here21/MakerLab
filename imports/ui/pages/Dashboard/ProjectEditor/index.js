@@ -14,6 +14,7 @@ import './style.scss';
 
 const FormItem = Form.Item;
 const { Option, OptGroup } = Select;
+const { TextArea } = Input;
 
 class ProjectEditor extends Component {
   constructor(props) {
@@ -22,11 +23,13 @@ class ProjectEditor extends Component {
       cover: null,
       coverInstance: null,
       fileList: null,
+      brief: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getCoverId = this.getCoverId.bind(this);
     this.handleStartUploadCover = this.handleStartUploadCover.bind(this);
     this.handleFileList = this.handleFileList.bind(this);
+    this.handleLimitBriefLength = this.handleLimitBriefLength.bind(this);
   }
 
   async handleSubmit(e) {
@@ -46,15 +49,12 @@ class ProjectEditor extends Component {
     });
     const coverSrc = Images.link(cover);
     const list = await this.fileListUpload(fileList);
-    const files = list.map((file) => {
-      console.log(file);
-      return {
-        fileId: file._id,
-        fileLink: Files.link(file),
-        fileName: file.name,
-        type: file.type,
-      };
-    });
+    const files = list.map(file => ({
+      fileId: file._id,
+      fileLink: Files.link(file),
+      fileName: file.name,
+      type: file.type,
+    }));
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -65,6 +65,7 @@ class ProjectEditor extends Component {
           projectName: values.projectName,
           projectSort: values.projectSort,
           projectType: values.projectType,
+          projectBrief: values.projectBrief,
           content: values.content,
           files,
         };
@@ -97,10 +98,10 @@ class ProjectEditor extends Component {
           uploader.start();
           uploader.on('uploaded', (error, fileObj) => {
             if (!error) {
-              message.success(`材料[${fileObj.name}]上传成功！`);
+              message.success(`附件[${fileObj.name}]上传成功！`);
               return resolve(fileObj);
             }
-            message.error(`材料[${fileObj.name}]上传失败！`);
+            message.error(`附件[${fileObj.name}]上传失败！`);
             return reject(error);
           });
         });
@@ -127,6 +128,10 @@ class ProjectEditor extends Component {
     this.setState({
       fileList,
     });
+  }
+
+  handleLimitBriefLength(value) {
+    console.log(value);
   }
 
   render() {
@@ -228,6 +233,22 @@ class ProjectEditor extends Component {
                   <Option value="消费升级">消费升级</Option>
                 </OptGroup>
               </Select>
+            )}
+          </FormItem>
+          <FormItem label="一句话简述" {...formItemLayout}>
+            {getFieldDecorator('projectBrief', {
+              rules: [
+                {
+                  required: true,
+                  message: '请填写项目简述!',
+                },
+              ],
+            })(
+              <TextArea
+                maxLength="50"
+                style={{ width: 300 }}
+                placeholder="字数限制在50以内"
+              />
             )}
           </FormItem>
           <FormItem label="项目内容" {...formItemLayout}>

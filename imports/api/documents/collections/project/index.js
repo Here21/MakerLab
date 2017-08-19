@@ -25,6 +25,10 @@ Project.schema = new SimpleSchema({
     type: String,
     optional: true,
   },
+  projectBrief: {
+    type: String,
+    optional: true,
+  },
   content: {
     type: String,
     optional: true,

@@ -11,11 +11,11 @@ import App from '../../ui/containers/App/App';
 import Home from '../../ui/pages/App/Home';
 import Lab from '../../ui/containers/App/Lab';
 import Course from '../../ui/containers/App/Course';
-import Project from '../../ui/pages/App/Project';
+import Project from '../../ui/containers/App/Project';
 import Login from '../../ui/pages/App/Login';
 import LabPage from '../../ui/containers/App/LabPage';
 import CoursePage from '../../ui/containers/App/CoursePage';
-import ProjectPage from '../../ui/pages/App/ProjectPage';
+import ProjectPage from '../../ui/containers/App/ProjectPage';
 
 // Dashboard
 import Dashboard from '../../ui/pages/Dashboard';

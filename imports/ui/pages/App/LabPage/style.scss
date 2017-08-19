@@ -63,9 +63,37 @@
   }
 
   .bottom-part {
-    //margin-top: 10rem;
     width: 100%;
-    //background-color: #FAFAFA;
+    .title {
+      text-align: center;
+    }
+    .article {
+      min-height: 16rem;
+      .content {
+        font-size: 18px;
+        padding: 2rem 0;
+        .ql-align-center {
+          text-align: center;
+        }
+        .ql-align-justify {
+          text-align: justify;
+        }
+        .ql-align-right {
+          text-align: right;
+        }
+        img {
+          max-width: 90%;
+        }
+      }
+    }
+
+    .file-list {
+      margin: 3rem 0;
+      .file-link {
+        height: 30px;
+        line-height: 30px;
+      }
+    }
 
     .lab-part-title {
       width: 20rem;
@@ -76,11 +104,11 @@
       border-top: 1px solid #272822;
       margin: 0 auto;
     }
+
     .bottom-part-container {
       margin: 3rem 0;
       display: flex;
       flex-wrap: wrap;
     }
-
   }
 }

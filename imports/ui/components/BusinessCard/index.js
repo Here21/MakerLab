@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 
+// TODO: 个人技能选择
+
 const SkillField = () => (
   <div className="skill-field-item">
     <img src="https://cloud.githubusercontent.com/assets/1698185/18039916/f025c090-6dd9-11e6-9d86-a4d48a1bf049.png" alt=""/>
     <p>HTML5</p>
   </div>
-)
+);
 
 const BusinessCard = ({ profile }) => {
   return (
@@ -24,14 +26,14 @@ const BusinessCard = ({ profile }) => {
         </p>
         <div>{profile.bio}</div>
       </div>
-      <div className="user-skill">
-        <p>擅长领域</p>
-        <div className="skill-field-group">
-          <SkillField/>
-          <SkillField/>
-          <SkillField/>
-        </div>
-      </div>
+      {/*<div className="user-skill">*/}
+        {/*<p>擅长领域</p>*/}
+        {/*<div className="skill-field-group">*/}
+          {/*<SkillField/>*/}
+          {/*<SkillField/>*/}
+          {/*<SkillField/>*/}
+        {/*</div>*/}
+      {/*</div>*/}
     </div>
   );
 };

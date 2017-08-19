@@ -1,45 +1,59 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import 'react-quill/dist/quill.snow.css'; // ES6
 import BusinessCard from '../../../components/BusinessCard';
-import ProjectCard from '../../../components/ProjectCard';
-import CourseCard from '../../../components/CourseCard';
 import './style.scss';
 
-export default class SecondaryPage extends Component {
+class ProjectPage extends Component {
+  constructor(props) {
+    super(props);
+  }
+  // TODO: 绑定数据
   render() {
+    const { data, user } = this.props;
+    console.log(data, user);
     return (
-      <div className="lab-page">
+      <div className="project-page">
         <div className="wrap">
           <div className="cover">
-            <img alt="example" src="https://cloud.githubusercontent.com/assets/1698185/18039916/f025c090-6dd9-11e6-9d86-a4d48a1bf049.png" />
+            <div className="cover-shade"/>
+            <img alt="example" src={data.coverSrc} />
           </div>
-          <div className="lab-page-brief">
-            <h1>移动互联网</h1>
-            <h2>探索移动互联网的最新技术与最佳实践</h2>
-            <h3>Created by Martin</h3>
+          <div className="project-page-brief">
+            <h1>{data.projectName}</h1>
+            <h2>{data.projectType}</h2>
+            <h3>Created by {user.nickName}</h3>
           </div>
-          <BusinessCard />
+          <BusinessCard profile={user}/>
         </div>
         <div className="bottom-part">
-          <div className="inner">
-            <h1 className="lab-part-title">项目展示</h1>
-            <div className="bottom-part-container">
-              {
-                [1, 2, 3, 4, 5, 6, 7].map(k => (
-                  <ProjectCard key={k} />
-                ))
-              }
+          <h1 className="title">课程内容</h1>
+          <div className="article">
+            <div className="content" dangerouslySetInnerHTML={{ __html: data.content }}>
             </div>
-            <h1 className="lab-part-title">专业课程</h1>
-            <div className="bottom-part-container">
-              {
-                [1, 2].map(k =>
-                  <CourseCard key={k} />
-                )
-              }
-            </div>
+          </div>
+          <h1 className="title">相关附件</h1>
+          <div className="file-list">
+            {
+              data.files ? data.files.map((file) => {
+                return (
+                  <p key={file.fileId} className="file-link">
+                    {file.fileName}
+                    <a href={file.fileLink} download={file.fileName}>下载</a>
+                  </p>
+                );
+              }) : <p style={{ textAlign: 'center' }}>无附件</p>
+            }
           </div>
         </div>
       </div>
     );
   }
 }
+
+ProjectPage.propTypes = {
+  data: PropTypes.object,
+  user: PropTypes.object,
+};
+
+export default ProjectPage;
