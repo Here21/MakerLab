@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 import { Link } from 'react-router';
 import './style.scss';
 
@@ -33,7 +34,9 @@ export default class Dashboard extends Component {
           collapsed={this.state.collapsed}
         >
           <div className="logo">
-            <p>MakerLab</p>
+            <Link to="/home">
+              <p>MakerLab</p>
+            </Link>
           </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={[`${location.pathname}`]}>
             <Menu.Item key="/dashboard/me">
@@ -69,6 +72,14 @@ export default class Dashboard extends Component {
               type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
               onClick={this.toggle}
             />
+            <Button
+              className="user-logout"
+              type="primary"
+              icon="logout"
+              onClick={() => Meteor.loggingOut()}
+            >
+              注销登录
+            </Button>
           </Header>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', overflowY: 'auto' }}>
             { this.props.children }

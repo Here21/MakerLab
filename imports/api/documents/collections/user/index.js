@@ -32,6 +32,10 @@ Schema.UserProfile = new SimpleSchema({
     type: String,
     optional: true,
   },
+  headImg: {
+    type: String,
+    optional: true,
+  },
   skills: {
     type: Array,
     optional: true,

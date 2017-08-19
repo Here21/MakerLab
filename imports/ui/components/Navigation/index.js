@@ -8,8 +8,7 @@ import './style.scss';
 
 class Navigation extends Component {
   render() {
-    const { location, user } = this.props;
-
+    const { user } = this.props;
     return (
       <header className="navigation">
         <div className="logo"><span>MakerLab</span></div>
@@ -22,8 +21,8 @@ class Navigation extends Component {
             user ?
               <Link to="/dashboard" className="user-block">
                 <div className="user-panel">
-                  <Avatar src={user.profile.gender === 'Male' ? '/icons/boy.png' : '/icons/girl.png'} />
-                  <span>{user.profile.nickName}</span>
+                  <Avatar src={user.profile.headImg} />
+                  <span className="user-name">{user.profile.nickName}</span>
                 </div>
               </Link> :
               <Link to="/login" className="login-panel">

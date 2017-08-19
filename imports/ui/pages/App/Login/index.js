@@ -43,6 +43,7 @@ export default class Login extends Component {
       profile: {
         nickName: values.nickname,
         gender: values.gender,
+        headImg: `/headimg/head_img_${values.gender === 'Male' ? 'boy' : 'girl'}_${Math.floor(Math.random() * 6)}.svg`,
       },
     };
     Accounts.createUser(userInfo, (error) => {
