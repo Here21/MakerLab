@@ -21,12 +21,12 @@ class CoursePage extends Component {
           <BusinessCard profile={user}/>
         </div>
         <div className="bottom-part">
-          <h1>课程内容</h1>
+          <h1 className="title">课程内容</h1>
           <div className="article">
             <div className="content" dangerouslySetInnerHTML={{ __html: data.content }}>
             </div>
           </div>
-          <h1>相关附件</h1>
+          <h1 className="title">相关附件</h1>
           <div className="file-list">
             {
               data.files ? data.files.map((file) => {
