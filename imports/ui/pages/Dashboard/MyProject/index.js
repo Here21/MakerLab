@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { browserHistory, Link } from 'react-router';
 import PropTypes from 'prop-types';
-import { Table, Icon, Button, Popconfirm, message } from 'antd';
+import { Table, Icon, Button, Popconfirm, message, Tag } from 'antd';
 import moment from 'moment';
 
 import './style.scss';
@@ -58,6 +58,15 @@ export default class MyProject extends Component {
         dataIndex: 'likes',
       },
       {
+        title: '状态',
+        dataIndex: 'status',
+        render: (status) => {
+          return status ?
+            <Tag color="red">已删除</Tag> :
+            <Tag color="green">已创建</Tag>;
+        },
+      },
+      {
         title: '创建时间',
         dataIndex: 'date',
       },
@@ -65,18 +74,18 @@ export default class MyProject extends Component {
         title: '操作',
         render: (text, record) =>
           <span>
-            <a href="#">编辑</a>
-            <span className="ant-divider" />
+            {/*<a href="#">编辑</a>*/}
+            {/*<span className="ant-divider" />*/}
             <Popconfirm
               title="确定要删除吗？"
               onConfirm={() => this.handleRemove(record.key)}
             >
               <a href="#">删除</a>
             </Popconfirm>
-            <span className="ant-divider" />
-            <a href="#" className="ant-dropdown-link">
-              More actions <Icon type="down" />
-            </a>
+            {/*<span className="ant-divider" />*/}
+            {/*<a href="#" className="ant-dropdown-link">*/}
+              {/*More actions <Icon type="down" />*/}
+            {/*</a>*/}
           </span>,
       },
     ];
@@ -90,6 +99,7 @@ export default class MyProject extends Component {
       likes: project.likes || 0,
       date: moment(project.createdAt).format('YYYY-MM-DD'),
       coverSrc: project.coverSrc,
+      status: project.removed,
     }));
 
     return (

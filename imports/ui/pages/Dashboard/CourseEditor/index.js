@@ -32,7 +32,7 @@ class CourseEditor extends Component {
   async handleSubmit(e) {
     e.preventDefault();
     const { coverInstance, fileList } = this.state;
-    // 开始上传
+    // 封面
     const cover = await new Promise((resolve, reject) => {
       coverInstance.start();
       coverInstance.on('uploaded', (error, fileObj) => {
