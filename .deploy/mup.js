@@ -1,7 +1,6 @@
 module.exports = {
   servers: {
     one: {
-      // TODO: set host address, username, and authentication method
       host: '47.92.29.165',
       username: 'root',
       // password:
@@ -10,9 +9,12 @@ module.exports = {
   },
 
   meteor: {
-    // TODO: change app name and path
-    name: 'CHO',
+    name: 'MakerLab',
     path: '../',
+
+    volumes: {
+      '/makerlab':'/makerlab'
+    },
 
     servers: {
       one: {},
@@ -25,8 +27,8 @@ module.exports = {
     env: {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
-      PORT: 3000,
-      ROOT_URL: 'http://www.hiyingyang.com',
+      PORT: 5657,
+      ROOT_URL: 'http://47.92.29.165:5657',
       // MONGO_URL: "mongodb://mongodb:27017",
       MONGO_URL: 'mongodb://localhost/meteor'
     },
@@ -34,6 +36,7 @@ module.exports = {
     docker: {
       // change to 'kadirahq/meteord' if your app is not using Meteor 1.4
       // image: 'abernix/meteord:base',
+
       image: 'daocloud.io/wwlweihai/meteord:latest',
       //imagePort: 3000, // (default: 80, some images EXPOSE different ports)
       // bind: '127.0.0.1',
