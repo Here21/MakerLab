@@ -82,9 +82,9 @@ class LabEditor extends Component {
     return (
       <div className="lab-editor">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem {...formItemLayout} label="创建人">
-            <span className="ant-form-text">张灏哲</span>
-          </FormItem>
+          {/*<FormItem {...formItemLayout} label="创建人">*/}
+            {/*<span className="ant-form-text">张灏哲</span>*/}
+          {/*</FormItem>*/}
           <FormItem label="上传封面" {...formItemLayout}>
             <div className="uploader-wrapper">
               <UploadAndCut

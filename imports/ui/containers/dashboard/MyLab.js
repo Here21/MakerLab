@@ -5,9 +5,9 @@ import Labs from '../../../api/documents/collections/labs';
 import Loading from '../../components/Loading';
 import MyLab from '../../pages/Dashboard/MyLab';
 
-
 const composer = ({ params }, onData) => {
-  const labs = Meteor.subscribe('labs.all');
+  const userId = Meteor.userId();
+  const labs = Meteor.subscribe('labs.ownerLabs', userId);
   if (labs.ready()) {
     const data = Labs.find({}).fetch();
     onData(null, { data });

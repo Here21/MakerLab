@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Form, Input, Button, Select, message } from 'antd';
+import { Form, Input, Button, Select, message, Alert } from 'antd';
 import './style.scss';
 
 const FormItem = Form.Item;
@@ -35,6 +35,7 @@ class ProfileSettings extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { user } = this.props;
+    console.log(user);
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -59,8 +60,22 @@ class ProfileSettings extends Component {
     };
 
     return (
-      <div className="dashboard-me">
+      <div className="dashboard-profile-settings">
+        {
+          user.profile.bio ? '' :
+            <Alert
+              message="请注意：您还为完善个人信息，建议先完善个人信息再去创建其他项目"
+              type="warning"
+              showIcon
+            />
+        }
         <Form onSubmit={this.handleSubmit} className="registration-form">
+          <FormItem
+            {...formItemLayout}
+            label="头像"
+          >
+            <img className="head-img" src={user.profile.headImg} alt=""/>
+          </FormItem>
           <FormItem
             {...formItemLayout}
             label="邮箱"
@@ -78,19 +93,6 @@ class ProfileSettings extends Component {
             label="昵称"
           >
            <span>{user.profile.nickName}</span>
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label="个人介绍"
-          >
-            {getFieldDecorator('bio', {
-              initialValue: this.state.bio,
-            })(
-              <TextArea
-                placeholder="请介绍一下自己"
-                autosize={{ minRows: 2, maxRows: 4 }}
-              />
-            )}
           </FormItem>
           <FormItem
             {...formItemLayout}
@@ -143,10 +145,25 @@ class ProfileSettings extends Component {
               </Select>
             )}
           </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="个人介绍"
+          >
+            {getFieldDecorator('bio', {
+              initialValue: this.state.bio,
+            })(
+              <TextArea
+                style={{ width: 400 }}
+                placeholder="请介绍一下自己"
+                autosize={false}
+              />
+            )}
+          </FormItem>
           <FormItem {...tailFormItemLayout}>
             <Button
               type="primary"
               htmlType="submit"
+              style={{ width: 200 }}
               className="registration-button"
             >
               完善个人资料

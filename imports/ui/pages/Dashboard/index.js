@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Icon, Button } from 'antd';
-import { Link } from 'react-router';
+import { Layout, Menu, Icon, Button, message } from 'antd';
+import { Link, browserHistory } from 'react-router';
 import './style.scss';
 
 const { Header, Sider, Content } = Layout;
@@ -22,6 +22,13 @@ export default class Dashboard extends Component {
     this.setState({
       collapsed: !this.state.collapsed,
     });
+  }
+
+  componentDidMount() {
+    if (!Meteor.userId()) {
+      message.info('请先登录');
+      browserHistory.replace('/login');
+    }
   }
 
   render() {
@@ -76,7 +83,10 @@ export default class Dashboard extends Component {
               className="user-logout"
               type="primary"
               icon="logout"
-              onClick={() => Meteor.loggingOut()}
+              onClick={() => {
+                Meteor.logout();
+                browserHistory.replace('/login');
+              }}
             >
               注销登录
             </Button>

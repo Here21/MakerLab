@@ -21,7 +21,7 @@ class Navigation extends Component {
             user ?
               <Link to="/dashboard" className="user-block">
                 <div className="user-panel">
-                  <Avatar src={user.profile.headImg} />
+                  <Avatar style={{ backgroundColor: 'transparent' }} src={user.profile.headImg} />
                   <span className="user-name">{user.profile.nickName}</span>
                 </div>
               </Link> :
