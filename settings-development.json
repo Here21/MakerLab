@@ -1,8 +1,5 @@
 {
   "public": {
   },
-  "private": {
-    "storagePath": "/Users/simon/Desktop/tempImage/Images"
-  },
-  "storagePath": "/Users/simon/Desktop/tempImage/Images"
+  "storagePath": "/Users/simon/Desktop/tempImage"
 }

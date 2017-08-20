@@ -35,7 +35,6 @@ class ProfileSettings extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { user } = this.props;
-    console.log(user);
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -118,6 +117,10 @@ class ProfileSettings extends Component {
                 </OptGroup>
                 <OptGroup label="创意">
                   <Option value="头脑风暴">头脑风暴</Option>
+                </OptGroup>
+                <OptGroup label="市场">
+                  <Option value="新媒体运营">新媒体运营</Option>
+                  <Option value="市场营销">市场营销</Option>
                 </OptGroup>
               </Select>
             )}

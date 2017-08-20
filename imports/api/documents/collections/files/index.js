@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 
 // TODO: 目录管理，按照登录用户的userId去分类
 const Files = new FilesCollection({
-  storagePath: Meteor.settings.storagePath,
+  storagePath: `${Meteor.settings.storagePath}/files`,
   debug: true,
   collectionName: 'Files',
   allowClientCode: true, // Disallow remove files from Client

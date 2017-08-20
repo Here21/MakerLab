@@ -2,7 +2,7 @@ import { FilesCollection } from 'meteor/ostrio:files';
 import { Meteor } from 'meteor/meteor';
 
 const Images = new FilesCollection({
-  storagePath: Meteor.settings.storagePath,
+  storagePath: `${Meteor.settings.storagePath}/images`,
   debug: true,
   collectionName: 'Images',
   allowClientCode: true, // Disallow remove files from Client
